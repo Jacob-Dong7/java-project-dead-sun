@@ -2,17 +2,13 @@ import java.util.*;
 
 public class Player extends Character {
     private final Scanner scnr = new Scanner(System.in);
-    private int strength, charisma, stealth , points, input;
+    Stats playerStat;
 
     public Player() {
-        strength = 0;
-        charisma = 0;
-        stealth = 0;
+        playerStat = new Stats();
     }
 
     public void create() {
-        points = 5;
-
         System.out.println("==================================================");
         System.out.println("Character Creation");
         System.out.println("Please enter your name: ");
@@ -39,81 +35,29 @@ public class Player extends Character {
 
 
         //character stats creation 
-        System.out.println("==================================================");
-        System.out.println("Assign You Stats:");
+        playerStat.statAssign();
+        displayStat();
+
         
-        //while loop created for stat creation
-        while (points > 0) {
-        
-        //tells user how many points remain
-        if (points > 1) {
-            System.out.println(
-                points +
-                " skill points remaining"
-            );
-        } else if (points == 1) {
-            System.out.println("1 skill point remaining");
-        }
-
-        System.out.println(
-            "===============================\n" +
-            "Current Stats:\n" +
-            "Strength: " + strength + "\n" +
-            "Charisma: " + charisma + "\n" + 
-            "Stealth: " + stealth +
-            "\n==============================="
-        );
-
-        System.out.println("==================================================");
-        System.out.println("1 (Strength) 2 (Charisma) 3 (Stealth) 4 (Reset)");
-        System.out.println("==================================================");
-
-        input = scnr.nextInt();
-
-        //user skill selection input
-        if (input == 1) {
-            ++strength;
-            --points;
-        } else if (input == 2) {
-            ++charisma;
-            --points;
-        } else if (input == 3) {
-            ++stealth;
-            --points;
-        } else if (input == 4) {
-            System.out.println("Your Stats Have Been Reset");
-            strength = 0;
-            stealth = 0; 
-            charisma = 0;
-            points = 5;
-
-        } else if (input == -1) {
-            System.out.println("Quitting...");
-            System.exit(0);
-        } else {
-            System.out.println("Please Select From The Options Displayed");
-            continue;
-        }
-
-        }
-
-        scnr.nextLine();
-
+    }
+    
+    public void displayStat() {
         System.out.println("==================================================");
         System.out.println(
             "Your Name: " + name + "\n" +
             "Your Stats: \n" +
-            "Strength: " + strength + "\n" +
-            "Charisma: " + charisma + "\n" +
-            "Stealth: " + stealth
+            "Strength: " + playerStat.strength + "\n" +
+            "Charisma: " + playerStat.charisma + "\n" +
+            "Stealth: " + playerStat.stealth
         );
         System.out.println("==================================================");
     }
 
+
     
     
     
-    public int intro() {
+    public void intro() {
         String[] introText = {
 
             "==================================================",
@@ -212,7 +156,7 @@ public class Player extends Character {
             "No survivors.",
             "",
             "You take what you can carry.",
-            "Three bullets. A knife. A dying flashlight.",
+            "Three bullets. An homemade pistol. A knife. And some bandages.",
             "",
             "The tunnel ahead is cold and black.",
             "",
@@ -234,7 +178,7 @@ public class Player extends Character {
                 System.out.println("Exiting...");
                 System.exit(0);
             } else if (input == 1) {
-                return input;
+                return;
             } else {
                 System.out.println("Press 1 to step into the ash...");
                 scnr.nextLine();
@@ -244,6 +188,7 @@ public class Player extends Character {
     };
 
 };
+    
 
 
 

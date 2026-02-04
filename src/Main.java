@@ -5,9 +5,8 @@ public class Main {
         System.out.println("Dead Sun");
         System.out.println("Developed by Jacob Dong");
         System.out.println("==================================================");
-        Player userPlayer = new Player();
-        userPlayer.create();
-        userPlayer.intro();
+
+        Game newGame = new Game();
     }
 
 }

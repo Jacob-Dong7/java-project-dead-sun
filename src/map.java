@@ -1,3 +1,3 @@
-public class map {
+abstract class Map {
     
 }

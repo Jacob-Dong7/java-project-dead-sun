@@ -1,3 +1,3 @@
-public class raiders {
+public class Raiders {
     
 }

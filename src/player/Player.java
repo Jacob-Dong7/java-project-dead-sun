@@ -1,14 +1,13 @@
+package player;
 import java.util.*;
+
+import core.Character;
 
 public class Player extends Character {
     private final Scanner scnr = new Scanner(System.in);
-    Stats playerStat;
+    private int input;
 
-    public Player() {
-        playerStat = new Stats();
-    }
-
-    public void create() {
+    public void create(Stats playerStat) {
         System.out.println("==================================================");
         System.out.println("Character Creation");
         System.out.println("Please enter your name: ");
@@ -36,12 +35,12 @@ public class Player extends Character {
 
         //character stats creation 
         playerStat.statAssign();
-        displayStat();
+        displayStat(playerStat);
 
         
     }
     
-    public void displayStat() {
+    public void displayStat(Stats playerStat) {
         System.out.println("==================================================");
         System.out.println(
             "Your Name: " + name + "\n" +

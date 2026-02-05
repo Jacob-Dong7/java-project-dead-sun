@@ -1,3 +1,4 @@
+package items;
 public class Weapon {
     private String Name;
     private int Damage;

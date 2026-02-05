@@ -1,4 +1,8 @@
+package player;
 import java.util.ArrayList;
+
+import items.Item;
+import items.Weapon;
 public class Inventory {
     private ArrayList<Item> inventory;
     private ArrayList<Weapon> weapons;

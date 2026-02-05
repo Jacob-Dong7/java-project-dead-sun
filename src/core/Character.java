@@ -1,4 +1,5 @@
-abstract class Character {
+package core;
+public abstract class Character {
     protected String name;
     protected int health;
     protected int damage;

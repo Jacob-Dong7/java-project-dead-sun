@@ -11,29 +11,27 @@ import core.Map;
 import core.Dungeon;
 import control.Control;
 
-public class Metro extends Map {
+public class Maintenance extends Map {
     private int randEnemy;
     private Random random = new Random();
 
-    ArrayList<Dungeon> metroOne;
-    public Metro() {
+    ArrayList<Dungeon> maintenanceTunnel;
+    public Maintenance() {
         completed = false;
-        numRooms = 3;
-        name = "Metro Line One";
+        numRooms = 2;
+        name = "Maintenance Tunnels";
     }
 
     public ArrayList<Dungeon> getMap() {
-        return metroOne;
+        return maintenanceTunnel;
     }
 
     public void populate() {
-        metroOne = new ArrayList<>();
+        maintenanceTunnel = new ArrayList<>();
 
         //populate the dungeon
-        metroOne.add(new Dungeon("Platform C", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
-        metroOne.add(new Dungeon("Concourse", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descTwo(randEnemy)));
-        metroOne.add(new Dungeon("Service Access", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descThree(randEnemy)));
-    }
+        maintenanceTunnel.add(new Dungeon("Valve Gallery", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
+        maintenanceTunnel.add(new Dungeon("Pump Junction", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), true, descTwo(randEnemy)));
 
     public int generateEnemy() {
         return random.nextInt(1, 4); //generate 1-3 enemy
@@ -48,15 +46,14 @@ public class Metro extends Map {
         if (enemy == 1) {
             String[] description = {
                 "==================================================",
-                "You step back onto Platform C.",
+                "You descend into the tunnels.",
                 "",
-                "Blankets scattered. Blood dried black on the tiles.",
+                "Valves line the wall like ribs. Pipes tick as they cool.",
                 "The air still smells like smoke.",
                 "",
-                "This was home.",
+                "One Black Torch raider squats by a toolbox, prying it ope.",
                 "",
-                "Near the bunks, one Black Torch raider digs through a pack.",
-                "His back is turned.",
+                "He hasn't seen you yet.",
                 "=================================================="
             };
             return description;
@@ -64,17 +61,12 @@ public class Metro extends Map {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
                 "==================================================",
-                "You step back onto Platform C.",
+                "You descend into the tunnels.",
                 "",
-                "Beds overturned. Barricades smashed inward.",
-                "Bodies lie where they fell.",
+                "Valves line the wall like ribs. Pipes tick as they cool.",
                 "",
-                "This was home.",
-                "",
-                enemyCount + " Black Torch raiders move between the bunks, looting quietly.",
-                "Torches glow in the dark.",
-                "",
-                "They block the way east.",
+                enemyCount + " Black Torch raiders work the corridor, torches low.",
+                "They control the only path forward.",
                 "=================================================="
             };
             return description;
@@ -85,13 +77,13 @@ public class Metro extends Map {
         if (enemy == 1) {
             String[] description = {
                 "==================================================",
-                "You enter the main concourse.",
+                "You step into the pump junction.",
                 "",
-                "Ticket gates melted. Shops stripped bare.",
-                "Ash drifts through the air.",
+                "Old machinery looms in the dark,",
+                "its casing warped by heat and age.",
                 "",
-                "A lone Black Torch guard stands by the escalator, machete in hand.",
-                "He blocks the path forward.",
+                "A lone raider stands near a barrel fire, warming his hands.",
+                "Behind him, a ladder climbs out of the tunnels.",
                 "=================================================="
             };
 
@@ -100,43 +92,13 @@ public class Metro extends Map {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
                 "==================================================",
-                "You enter the main concourse.",
+                "You enter the pump junction.",
+                "Massive pumps dominate the chamber,",
+                "their housings cracked and blackened.",
                 "",
-                "Burn marks climb the pillars. Shell casings crunch underfoot.",
-                "",
-                enemyCount + " Black Torch raiders patrol the escalators with torches and rifles.",
-                "There's no way around them.",
-                "=================================================="
-            };
-            return description;
-        }
-    }
-
-        public String[] descThree(int enemy) {
-        if (enemy == 1) {
-            String[] description = {
-                "==================================================",
-                "You slip through a rusted service door.",
-                "",
-                "Lights die behind you. Pipes drip overhead.",
-                "The tunnel narrows east.",
-                "",
-                "One Black Torch scout waits near the bend, warming his hands over a small fire.",
-                "Beyond him is the way out.",
-                "=================================================="
-            };
-
-            return description;
-        } else {
-            String enemyCount = String.valueOf(enemy);
-            String[] description = {
-                "==================================================",
-                "You enter the maintenance tunnel.",
-                "",
-                "Cold air. Hanging cables. Fresh footprints in ash.",
-                "",
-                enemyCount + " Black Torch raiders sit around a barrel fire, weapons close.",
-                "They're guarding the only exit east.",
+                enemyCount + " raiders gather around a barrel fire,",
+                "weapons within reach.",
+                "They’re guarding the ladder out.",
                 "=================================================="
             };
             return description;
@@ -145,18 +107,18 @@ public class Metro extends Map {
 
     public void printDescription(int curr) {
         System.out.println("==================================================");
-        for (int i = 0; i < metroOne.get(curr).getDescription().length; ++i){ 
-            System.out.println(metroOne.get(curr).getDescription()[i]);
+        for (int i = 0; i < maintenanceTunnel.get(curr).getDescription().length; ++i){ 
+            System.out.println(maintenanceTunnel.get(curr).getDescription()[i]);
         }
         System.out.println("==================================================");
     }
 
     public void play(Control playerControl, Stats playerStat, Stealth playerStealth, Speech playerSpeech) {
         int userInput;
-        for (int i = 0; i < metroOne.size(); ++i) {
+        for (int i = 0; i < maintenanceTunnel.size(); ++i) {
             printDescription(i);
             while (true) {
-                if (metroOne.get(i).enemyCount() > 0) {
+                if (maintenanceTunnel.get(i).enemyCount() > 0) {
                     userInput = playerControl.enemyPresent();
                     if (userInput == 1) {
                         if (playerStealth.sneakAttempt(playerStat) == true) {
@@ -174,7 +136,7 @@ public class Metro extends Map {
                         System.out.println("u kill");
                         break;
                     } else if (userInput == 3) {
-                        if (playerSpeech.attemptSpeech(playerStat, 1, metroOne.get(i).enemyCount()) == true) {
+                        if (playerSpeech.attemptSpeech(playerStat, 1, maintenanceTunnel.get(i).enemyCount()) == true) {
                             break;
                         } else {
                             System.out.println("u kill");
@@ -187,8 +149,7 @@ public class Metro extends Map {
                 }
             }
         }
-        System.out.println("You descend the stairwell.\nValves hiss somewhere below.");
+        completed = true;
     }
 }
-
-
+}

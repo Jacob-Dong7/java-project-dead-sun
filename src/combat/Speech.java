@@ -34,7 +34,6 @@ public class Speech {
             if (choice == 1) {
                 System.out.println("==================================================");
                 System.out.println("You push forward, unflinching.");
-                System.out.println("==================================================");
                 if (intimidate(playerStat) == true) {
                     System.out.println("==================================================");
                     if (enemyCount == 1) {
@@ -79,7 +78,6 @@ public class Speech {
                 System.out.println("You try to talk your way through.");
                 System.out.println("==================================================");
                 if (persuade(playerStat) == true) {
-                    System.out.println("==================================================");
                     if (enemyCount == 1) {
                         System.out.println(
                             "The raider listens." + "\n" +
@@ -120,7 +118,6 @@ public class Speech {
             } else if (choice == 3) {
                 System.out.println("==================================================");
                 System.out.println("You ready your weapon.");
-                System.out.println("==================================================");
                 System.out.println("==================================================");
                 if (enemyCount == 1) {
                         System.out.println(

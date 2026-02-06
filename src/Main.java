@@ -7,10 +7,15 @@ public class Main {
         System.out.println("==================================================");
 
         Game newGame = new Game();
+        newGame.start();
     }
 
 
 
 }
 
-//javac src/Main.java src/Character.java src/Player.java
+/*mkdir out 2>nul
+dir /s /b src\*.java > sources.txt
+javac -d out @sources.txt*/
+
+/* java -cp out Main */

@@ -23,6 +23,10 @@ public class Dungeon {
         this.description = description;
     }
 
+    public String[] getDescription() {
+        return description;
+    }
+
     public boolean bossPresent() {
         return boss;
     }
@@ -49,10 +53,6 @@ public class Dungeon {
     }
     public int enemyCount() {
         return enemyCount;
-    }
-
-    public String[] getDescription() {
-        return description;
     }
 
 }

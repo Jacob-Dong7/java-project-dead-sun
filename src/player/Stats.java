@@ -72,4 +72,14 @@ public class Stats {
 
         }
     }
+
+    public int getStealth() {
+        return stealth;
+    }
+    public int getStrength() {
+        return strength;
+    }
+    public int getCharisma() {
+        return charisma;
+    }
 }

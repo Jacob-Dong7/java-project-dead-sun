@@ -15,4 +15,5 @@ public abstract class Map {
     public boolean isCompleted() {
         return completed;
     }
+
 }

@@ -1,6 +1,5 @@
 package world;
 
-import java.util.Random;
 import java.util.ArrayList;
 
 import player.*;
@@ -11,36 +10,25 @@ import core.Map;
 import core.Dungeon;
 import control.Control;
 
+import enemy.Raiders;
+
 public class Metro extends Map {
     private int randEnemy;
-    private Random random = new Random();
 
-    ArrayList<Dungeon> metroOne;
     public Metro() {
         completed = false;
         numRooms = 3;
         name = "Metro Line One";
     }
 
-    public ArrayList<Dungeon> getMap() {
-        return metroOne;
-    }
 
     public void populate() {
-        metroOne = new ArrayList<>();
+        map = new ArrayList<>();
 
         //populate the dungeon
-        metroOne.add(new Dungeon("Platform C", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
-        metroOne.add(new Dungeon("Concourse", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descTwo(randEnemy)));
-        metroOne.add(new Dungeon("Service Access", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descThree(randEnemy)));
-    }
-
-    public int generateEnemy() {
-        return random.nextInt(1, 4); //generate 1-3 enemy
-    }
-
-    public int generateItem() {
-        return random.nextInt(1,3); //generate 1-2 items
+        map.add(new Dungeon("Platform C", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
+        map.add(new Dungeon("Concourse", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descTwo(randEnemy)));
+        map.add(new Dungeon("Service Access", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descThree(randEnemy)));
     }
 
     //description for each dungeon. Layout is exactly same for pretty much all rooms.
@@ -143,20 +131,12 @@ public class Metro extends Map {
         }
     }
 
-    public void printDescription(int curr) {
-        System.out.println("==================================================");
-        for (int i = 0; i < metroOne.get(curr).getDescription().length; ++i){ 
-            System.out.println(metroOne.get(curr).getDescription()[i]);
-        }
-        System.out.println("==================================================");
-    }
-
-    public void play(Control playerControl, Stats playerStat, Stealth playerStealth, Speech playerSpeech) {
+    public void play(Player userPlayer, Control playerControl, Stats playerStat, Stealth playerStealth, Speech playerSpeech, Combat combat) {
         int userInput;
-        for (int i = 0; i < metroOne.size(); ++i) {
+        for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
             while (true) {
-                if (metroOne.get(i).enemyCount() > 0) {
+                if (map.get(i).enemyCount() > 0) {
                     userInput = playerControl.enemyPresent();
                     if (userInput == 1) {
                         if (playerStealth.sneakAttempt(playerStat) == true) {
@@ -171,12 +151,12 @@ public class Metro extends Map {
                             break;
                         }
                     } else if (userInput == 2) {
-                        System.out.println("u kill");
-                        break;
+                        combat.fighting();
                     } else if (userInput == 3) {
-                        if (playerSpeech.attemptSpeech(playerStat, 1, metroOne.get(i).enemyCount()) == true) {
+                        if (playerSpeech.attemptSpeech(playerStat, 1, map.get(i).enemyCount()) == true) {
                             break;
                         } else {
+                            
                             System.out.println("u kill");
                             break;                            
                         }

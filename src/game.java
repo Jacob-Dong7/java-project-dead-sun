@@ -1,14 +1,15 @@
 import player.Inventory;
 import player.Player;
 import player.Stats;
+import world.Maintenance;
 import world.Metro;
 import core.Dungeon;
 
+import enemy.Raiders;
+
 import control.Control;
 
-import combat.Stealth;
-import combat.PlayerCombat;
-import combat.Speech;
+import combat.*;
 
 import java.util.*;
 
@@ -20,6 +21,9 @@ public class Game {
     Stealth playerStealth;
     Speech playerSpeech;
     Control playerControl;
+    Maintenance maintenanceTunnel;
+    Metro metroStation;
+    Combat combat;
     
     private static final Scanner scnr = new Scanner(System.in);
 
@@ -30,6 +34,11 @@ public class Game {
         playerStealth = new Stealth();
         playerSpeech = new Speech();
         playerControl = new Control();
+        combat = new Combat();
+
+        //maps
+        maintenanceTunnel = new Maintenance();
+        metroStation = new Metro();
         
     }
 
@@ -39,9 +48,12 @@ public class Game {
         userPlayer.intro();
 
         //level one metro station
-        Metro metroStation = new Metro();
         metroStation.populate();
-        metroStation.play(playerControl, playerStat, playerStealth, playerSpeech);
+        metroStation.play(userPlayer, playerControl, playerStat, playerStealth, playerSpeech, combat);
+
+        //level two maintenance tunnel
+        maintenanceTunnel.populate();
+        maintenanceTunnel.play(playerControl, playerStat, playerStealth, playerSpeech);
     }
 
 }

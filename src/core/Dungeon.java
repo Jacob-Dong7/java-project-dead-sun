@@ -1,8 +1,7 @@
 package core;
-
+import java.util.*;
 
 public class Dungeon {
-
     protected String name;
     protected int enemyCount;
     protected String enemyType;

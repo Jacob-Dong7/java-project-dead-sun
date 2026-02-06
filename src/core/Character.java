@@ -24,4 +24,15 @@ public abstract class Character {
         return this.name;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void takeDamage(int damageTaken) {
+        health -= damageTaken;
+    }
 }

@@ -1,4 +1,11 @@
 package enemy;
-public class Raiders {
+import core.Character;
+
+public class Raiders extends Character{
     
+    public Raiders() {
+        name = "Black Torch";
+        health = 50;
+        damage = 20;
+    }
 }

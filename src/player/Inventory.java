@@ -18,4 +18,14 @@ public class Inventory {
         weapons.add(new Weapon("Knife", 20));
 
     }
+
+    public void switchWeapon() {
+
+    }
+
+    public void useItem() {
+        while (true) {
+            
+        }
+    }
 }

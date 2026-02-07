@@ -1,12 +1,12 @@
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\Game.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\Main.java
+C:\Programming\Java\dead-sun\java-project-dead-sun\src\combat\Combat.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\combat\EnemyCombat.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\combat\PlayerCombat.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\combat\Speech.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\combat\Stealth.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\control\Control.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Character.java
-C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Combat.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Dungeon.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Map.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\enemy\Raiders.java

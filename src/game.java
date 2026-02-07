@@ -1,40 +1,31 @@
-import player.Inventory;
-import player.Player;
-import player.Stats;
-import world.Maintenance;
-import world.Metro;
-import core.Dungeon;
-
-import enemy.Raiders;
-
-import control.Control;
-
+import player.*;
+import world.*;
+import core.*;
+import control.*;
 import combat.*;
-
 import java.util.*;
 
 public class Game {
+    GameContext gc;
+
     ArrayList<Dungeon> currMap;
-    Player userPlayer;
-    Stats playerStat;
-    Inventory userInventory;
-    Stealth playerStealth;
-    Speech playerSpeech;
-    Control playerControl;
     Maintenance maintenanceTunnel;
     Metro metroStation;
-    Combat combat;
+
+
     
     private static final Scanner scnr = new Scanner(System.in);
 
     public Game() {   
-        userPlayer = new Player();
-        playerStat = new Stats();
-        userInventory = new Inventory();
-        playerStealth = new Stealth();
-        playerSpeech = new Speech();
-        playerControl = new Control();
-        combat = new Combat();
+        Player p = new Player();
+        Stats s = new Stats();
+        Inventory i = new Inventory();
+        Control c = new Control();
+        Stealth st = new Stealth();
+        Speech sp = new Speech();
+        Combat ct = new Combat();
+        
+        gc = new GameContext(p, s, i, st, sp, c, ct);
 
         //maps
         maintenanceTunnel = new Maintenance();
@@ -44,12 +35,13 @@ public class Game {
 
     public void start() {
         //start player creation and stats distribution
-        userPlayer.create(playerStat);
-        userPlayer.intro();
+        gc.player.create(gc.stats);
+        gc.player.create(gc.stats);
+        gc.player.intro();
 
         //level one metro station
         metroStation.populate();
-        metroStation.play(userPlayer, playerControl, playerStat, playerStealth, playerSpeech, combat);
+        metroStation.play(gc);
 
         //level two maintenance tunnel
         maintenanceTunnel.populate();

@@ -8,4 +8,8 @@ public class Raiders extends Character{
         health = 50;
         damage = 20;
     }
+
+    public void killed() {
+
+    }
 }

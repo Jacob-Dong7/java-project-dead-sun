@@ -1,11 +1,11 @@
 package core;
 public abstract class Character {
-    protected String name;
+    protected String name, currWeapon;
     protected int health;
     protected int damage;
 
     public Character() {
-        this.name = "No name";
+        this.name = "Junting Xie";
         this.health = 100;
         this.damage = 0;
     }
@@ -20,6 +20,15 @@ public abstract class Character {
         this.damage = damage;
     }
 
+    public Character(String name, int health, int damage, String weapon) {
+        this.name = name;
+        this.health = health;
+        this.damage = damage;
+        this.currWeapon = weapon;
+    }
+
+
+
     public String getName() {
         return this.name;
     }
@@ -32,7 +41,13 @@ public abstract class Character {
         return health;
     }
 
+    public String getWeapon() {
+        return currWeapon;
+    }
+
     public void takeDamage(int damageTaken) {
         health -= damageTaken;
     }
+
+
 }

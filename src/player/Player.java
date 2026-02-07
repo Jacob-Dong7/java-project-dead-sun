@@ -7,10 +7,17 @@ public class Player extends Character {
     private final Scanner scnr = new Scanner(System.in);
     private int input;
 
+
     public void create(Stats playerStat) {
         System.out.println("==================================================");
         System.out.println("Character Creation");
         System.out.println("Please enter your name: ");
+
+        //default health weapon and its damage 
+        health = 100;
+        currWeapon = "Knife";
+        damage = 20;
+
 
         //name creation and validation
         while (true) {
@@ -32,6 +39,7 @@ public class Player extends Character {
 
         }
 
+    
 
         //character stats creation 
         playerStat.statAssign();
@@ -39,7 +47,7 @@ public class Player extends Character {
 
         
     }
-    
+
     public void displayStat(Stats playerStat) {
         System.out.println("==================================================");
         System.out.println(
@@ -51,11 +59,7 @@ public class Player extends Character {
         );
         System.out.println("==================================================");
     }
-
-
-    
-    
-    
+  
     public void intro() {
         String[] introText = {
 

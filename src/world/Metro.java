@@ -8,12 +8,14 @@ import combat.*;
 
 import core.Map;
 import core.Dungeon;
+import core.GameContext;
 import control.Control;
 
 import enemy.Raiders;
 
 public class Metro extends Map {
     private int randEnemy;
+    Raiders raider = new Raiders();
 
     public Metro() {
         completed = false;
@@ -131,15 +133,15 @@ public class Metro extends Map {
         }
     }
 
-    public void play(Player userPlayer, Control playerControl, Stats playerStat, Stealth playerStealth, Speech playerSpeech, Combat combat) {
+    public void play(GameContext gc) {
         int userInput;
         for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
             while (true) {
                 if (map.get(i).enemyCount() > 0) {
-                    userInput = playerControl.enemyPresent();
+                    userInput = gc.control.enemyPresent();
                     if (userInput == 1) {
-                        if (playerStealth.sneakAttempt(playerStat) == true) {
+                        if (gc.stealth.sneakAttempt(gc.stats) == true) {
                             System.out.println("==================================================");
                             System.out.println("You successfully sneaked pass");
                             System.out.println("==================================================");
@@ -151,18 +153,17 @@ public class Metro extends Map {
                             break;
                         }
                     } else if (userInput == 2) {
-                        combat.fighting();
+                        gc.combat.fighting(gc, raider, map.get(i));
                     } else if (userInput == 3) {
-                        if (playerSpeech.attemptSpeech(playerStat, 1, map.get(i).enemyCount()) == true) {
+                        if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
                             break;
                         } else {
-                            
-                            System.out.println("u kill");
+                            gc.combat.fighting(gc.player, raider, map.get(i));
                             break;                            
                         }
                     }
                 } else {
-                    userInput = playerControl.noEnemy();
+                    userInput = gc.control.noEnemy();
                     break;
                 }
             }

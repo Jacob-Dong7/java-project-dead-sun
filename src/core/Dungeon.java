@@ -22,6 +22,9 @@ public class Dungeon {
         this.description = description;
     }
 
+    public void removeEnemy(int num) {
+        this.enemyCount -= num;
+    }
     public String[] getDescription() {
         return description;
     }
@@ -37,6 +40,8 @@ public class Dungeon {
     public String getEnemyType() {
         return enemyType;
     }
+
+
 
     public int ammo() {
         return ammo;

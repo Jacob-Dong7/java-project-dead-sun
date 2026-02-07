@@ -24,19 +24,38 @@ public class Inventory {
     }
 
     public void checkHeal(Player player) {
+        boolean found = false;
+        if (player.getHealth() == 100) {
+            System.out.println("You check your wounds, but there’s nothing to treat.");
+            return;
+        }
+
         for (Item item : inventory) {
             if (item.getName().equals("bandage")) {
                 if (item.getAmount() > 0) {
+                    found = true;
                     heal(player);
+                    item.consume();
                 }
             } 
         }
 
-        System.out.println("You are out of bandages")
+        if (found == false) {
+            System.out.println("You search your pack in panic, but find only blood-stained rags and nothing to use.");
+            return;
+        }
     }
 
+    //30 healing 80 110 - 100
     public void heal(Player player) {
+        int health = player.getHealth();
+        if (health + 20 > 100) {
 
+            player.healBy(30 - ((health + 20) - 100));
+        } else {
+            player.healBy(20);
+        }
+        System.out.println("You bind the wound tightly, the bleeding slowing as the pain fades to a dull ache.")
     }
 
     public int getAmmo() {
@@ -49,14 +68,5 @@ public class Inventory {
         }
 
         return 0;
-    }
-
-
-    
-
-    public void useItem() {
-        while (true) {
-            
-        }
     }
 }

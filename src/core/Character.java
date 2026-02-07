@@ -27,8 +27,6 @@ public abstract class Character {
         this.currWeapon = weapon;
     }
 
-
-
     public String getName() {
         return this.name;
     }
@@ -47,6 +45,10 @@ public abstract class Character {
 
     public void takeDamage(int damageTaken) {
         health -= damageTaken;
+    }
+
+    public void healBy(int healing) {
+        health += healing;
     }
 
 

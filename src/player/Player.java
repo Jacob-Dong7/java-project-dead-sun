@@ -7,6 +7,23 @@ public class Player extends Character {
     private final Scanner scnr = new Scanner(System.in);
     private int input;
 
+    public void killed() {
+        System.out.println(
+            "==================================================\n" +
+            "You collapse, strength leaving your body.\n" +
+            "\n" +
+            "Breath slows.\n" + 
+            "Thoughts scatter.\n" +
+            "\n" +
+            "The world grows distant and quiet.\n" +
+            "\n" + 
+            name + " is gone.\n" +
+            "The ash endures.\n" +
+            "GAME OVER\n" +
+             "==================================================" 
+        );
+        System.exit(0);
+    }
 
     public void create(Stats playerStat) {
         System.out.println("==================================================");

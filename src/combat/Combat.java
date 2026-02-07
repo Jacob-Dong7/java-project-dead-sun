@@ -13,49 +13,63 @@ public class Combat {
         defender.takeDamage(attacker.getDamage());
     }
 
-
-    public void fighting(GameContext gc, Character enemy, Dungeon map) {
-        int input;
-            for (int i = 0; i < map.enemyCount(); ++i) {
-                while (true) {
-
-
-                    System.out.println("==================================================");
-                    System.out.println("1 (Attack) 2 (Heal) 3 (Inventory) 4 (Switch Weapons) 5 (Check Status)");
-                    System.out.println("==================================================");
-                    input = scnr.nextInt();
-                    if (verifyControl(input) == false ) {
-                        System.out.println("Choose your next move");
-                        continue;
-                    }
-                    
-                    if (input == 1) {
-                       if (gc.player.getWeapon() == "Pistol" || gc.player.getWeapon() == "Rifle") {
-                        if (gc.inventory.getAmmo() <= 0) {
-                            System.out.println("You are out of ammo");
-                            continue;
-                        } 
-                       }
-
-                       attack(gc.player, enemy, gc.player.getWeapon());
-                    } else if (input == 2) {
-                        gc.inventory.heal(gc.player);
-                    }
-
-                    if (enemy.getHealth() <= 0) {
-                        map.removeEnemy(1);
-                        if (enemy instanceof Raiders) {
-                            ((Raiders) enemy).killed();
-                        }
-
-                        break;
-                    }
-
-
-                }
+    public void runEncounter(GameContext gc, Dungeon map) {
+        for (int i = 0; i < map.enemyCount(); ++i) {
+            if (map.getEnemyType().equals("raider")) {
+                Raiders raider = new Raiders();
+                fightEnemy(gc, raider, map);
             }
+        }
 
     }
+
+    public void fightEnemy(GameContext gc, Character enemy, Dungeon map) {
+        int input;
+        while (true) {
+            System.out.println("==================================================");
+            System.out.println("1 (Attack) 2 (Heal) 3 (Inventory) 4 (Switch Weapons) 5 (Check Status)");
+            System.out.println("==================================================");
+            input = scnr.nextInt();
+            if (verifyControl(input) == false ) {
+                System.out.println("Choose your next move");
+                continue;
+            }
+                    
+            if (input == 1) { //player attack
+                //checks if player uses guns
+                if (gc.player.getWeapon() == "Pistol" || gc.player.getWeapon() == "Rifle") {
+                     if (gc.inventory.getAmmo() <= 0) {
+                        System.out.println("You are out of ammo");
+                        continue;
+                    } 
+                }
+
+            attack(gc.player, enemy, gc.player.getWeapon());
+
+            } else if (input == 2) { //user heal
+                 gc.inventory.heal(gc.player);
+            }
+
+
+            if (enemy.getHealth() <= 0) {
+                map.removeEnemy(1);
+                if (enemy instanceof Raiders) {
+                    ((Raiders) enemy).killed();
+                }
+                break; //enemy one killed
+            }
+            
+            //enemy attack backs depending on how many there are
+            for (int i = 0; i < map.enemyCount(); ++i) {
+                attack(enemy, gc.player, enemy.getWeapon());
+                if (enemy instanceof Raiders) {
+                    ((Raiders) enemy).attack();
+                }
+            }
+        }
+}
+
+
 
     public boolean verifyControl(int userInput) {
         if (userInput != 1 && userInput != 2 && userInput != 3 && userInput != 4 && userInput != 5 && userInput != -1) {

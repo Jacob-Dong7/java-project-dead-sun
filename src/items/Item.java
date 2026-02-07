@@ -16,4 +16,8 @@ public class Item {
         return this.amount;
     }
 
+    public void consume() {
+        --amount;
+    }
+
 }

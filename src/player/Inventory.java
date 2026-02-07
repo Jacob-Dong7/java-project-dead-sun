@@ -8,6 +8,7 @@ public class Inventory {
     private ArrayList<Weapon> weapons;
 
     public Inventory() {
+        int currentWeapon = 0;
         inventory = new ArrayList<>();
         weapons = new ArrayList<>();
         
@@ -20,6 +21,12 @@ public class Inventory {
     }
 
     public void switchWeapon() {
+        for (Weapon weapon : weapons) {
+            System.out.print(weapon.getName())
+        }
+    }
+
+    public Weapon getWeapon() {
 
     }
 
@@ -69,4 +76,6 @@ public class Inventory {
 
         return 0;
     }
+
 }
+

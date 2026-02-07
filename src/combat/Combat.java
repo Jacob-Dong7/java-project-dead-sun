@@ -10,22 +10,26 @@ public class Combat {
 
     //character one attacks character two
     public void attack(Character attacker, Character defender, String weapon) {
+        
         defender.takeDamage(attacker.getDamage());
     }
 
     public void runEncounter(GameContext gc, Dungeon map) {
+        ArrayList<Character> enemies = new ArrayList<>();
         for (int i = 0; i < map.enemyCount(); ++i) {
             if (map.getEnemyType().equals("raider")) {
                 Raiders raider = new Raiders();
-                fightEnemy(gc, raider, map);
+                enemies.add(raider);
             }
         }
 
+        fightEnemy(gc, enemies, map);
+
     }
 
-    public void fightEnemy(GameContext gc, Character enemy, Dungeon map) {
+    public void fightEnemy(GameContext gc, ArrayList<Character> enemies, Dungeon map) {
         int input;
-        while (true) {
+        while (!enemies.isEmpty()) {
             System.out.println("==================================================");
             System.out.println("1 (Attack) 2 (Heal) 3 (Inventory) 4 (Switch Weapons) 5 (Check Status)");
             System.out.println("==================================================");
@@ -37,37 +41,45 @@ public class Combat {
                     
             if (input == 1) { //player attack
                 //checks if player uses guns
-                if (gc.player.getWeapon() == "Pistol" || gc.player.getWeapon() == "Rifle") {
+                if (gc.player.getWeapon() == "pistol" || gc.player.getWeapon() == "rifle") {
                      if (gc.inventory.getAmmo() <= 0) {
                         System.out.println("You are out of ammo");
                         continue;
                     } 
                 }
 
-            attack(gc.player, enemy, gc.player.getWeapon());
+            attack(gc.player, enemies.get(0), gc.player.getWeapon());
 
             } else if (input == 2) { //user heal
                  gc.inventory.heal(gc.player);
             }
 
 
-            if (enemy.getHealth() <= 0) {
+            if (enemies.get(0).getHealth() <= 0) {
                 map.removeEnemy(1);
-                if (enemy instanceof Raiders) {
-                    ((Raiders) enemy).killed();
+                enemies.remove(0);
+    
+                if (enemies.get(0) instanceof Raiders) {
+                    ((Raiders) enemies.get(0)).killed();
                 }
-                break; //enemy one killed
             }
             
             //enemy attack backs depending on how many there are
-            for (int i = 0; i < map.enemyCount(); ++i) {
+            if (enemies.isEmpty()) break;
+
+            for (Character enemy : enemies) {
                 attack(enemy, gc.player, enemy.getWeapon());
-                if (enemy instanceof Raiders) {
-                    ((Raiders) enemy).attack();
-                }
             }
         }
 }
+    
+    public boolean playerStatus(GameContext gc) {
+        if (gc.player.getHealth() <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
 

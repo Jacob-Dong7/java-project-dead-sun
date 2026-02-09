@@ -8,26 +8,22 @@ public class Inventory {
     private ArrayList<Weapon> weapons;
 
     public Inventory() {
-        int currentWeapon = 0;
         inventory = new ArrayList<>();
         weapons = new ArrayList<>();
         
         inventory.add(new Item("bandage", 3));
         inventory.add(new Item("ammo", 3));
 
-        weapons.add(new Weapon("pistol", 50));
-        weapons.add(new Weapon("knife", 20));
-
+        weapons.add(Weapon.KNIFE);
     }
 
     public void switchWeapon() {
+        System.out.println("==================================================");
+        System.out.println("Weapons:");
         for (Weapon weapon : weapons) {
-            System.out.print(weapon.getName())
+            System.out.println("Weapon: " + weapon.getName() + " - Damage: " + weapon.getDamage());
         }
-    }
-
-    public Weapon getWeapon() {
-
+        System.out.println("==================================================");
     }
 
     public void checkHeal(Player player) {

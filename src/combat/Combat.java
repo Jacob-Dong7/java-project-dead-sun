@@ -10,9 +10,21 @@ public class Combat {
 
     //character one attacks character two
     public void attack(Character attacker, Character defender, String weapon) {
-        
+        int buffs;
+        buffs = weaponModifier(weapon) + skillsModifer();
         defender.takeDamage(attacker.getDamage());
     }
+
+    public int weaponModifier(String weapon) {
+        if (weapon.equals("knife")) {
+            
+        }
+
+    }
+
+
+    //runs the encounter
+    //packs the enemies into an arraylist
 
     public void runEncounter(GameContext gc, Dungeon map) {
         ArrayList<Character> enemies = new ArrayList<>();
@@ -48,6 +60,7 @@ public class Combat {
                     } 
                 }
 
+            //attacks
             attack(gc.player, enemies.get(0), gc.player.getWeapon());
 
             } else if (input == 2) { //user heal

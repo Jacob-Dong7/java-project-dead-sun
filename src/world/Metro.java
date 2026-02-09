@@ -153,7 +153,7 @@ public class Metro extends Map {
                             break;
                         }
                     } else if (userInput == 2) {
-                        gc.combat.fighting(gc, raider, map.get(i));
+                        gc.combat.runEncounter(gc, map.get(i));
                     } else if (userInput == 3) {
                         if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
                             break;

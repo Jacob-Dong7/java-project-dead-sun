@@ -1,29 +1,42 @@
-package player;
+package Inventory;
 import java.util.ArrayList;
 
-import items.Item;
-import items.Weapon;
+import java.util.Scanner;
+import items.*;
+import player.Player;
+
 public class Inventory {
-    private ArrayList<Item> inventory;
-    private ArrayList<Weapon> weapons;
+    private ArrayList<HealingItem> medPouch;
+    private ArrayList<Weapon> weaponSling;
+    private Currency wallet;
 
+    private static final Scanner scnr = new Scanner(System.in);
     public Inventory() {
-        inventory = new ArrayList<>();
-        weapons = new ArrayList<>();
-        
-        inventory.add(new Item("bandage", 3));
-        inventory.add(new Item("ammo", 3));
+        wallet = new Currency(20); //start user off with 20 bucks
+        medPouch = new ArrayList<>();
+        weaponSling = new ArrayList<>();  
 
-        weapons.add(Weapon.KNIFE);
+        medPouch.add(new HealingItem(Healing.BANDAGE, 2)); //start user off with 2 bandage
+        weaponSling.add(Weapon.KNIFE); //starting weapon is knife
     }
 
-    public void switchWeapon() {
+    public void switchWeapon(Player player) {
+        int input;
         System.out.println("==================================================");
         System.out.println("Weapons:");
-        for (Weapon weapon : weapons) {
-            System.out.println("Weapon: " + weapon.getName() + " - Damage: " + weapon.getDamage());
+        for (int i = 0; i < weaponSling.size(); ++i) {
+            System.out.print(i + 1);
+            System.out.println(" (" + weaponSling.get(i).getName() + " Damage: " + weaponSling.get(i).getDamage() + ")");
         }
+
         System.out.println("==================================================");
+
+        //changing weapon
+        input = scnr.nextInt() - 1;
+
+        player.switchWeapon(weaponSling.get(input));
+
+        
     }
 
     public void checkHeal(Player player) {

@@ -5,6 +5,8 @@ import control.*;
 import combat.*;
 import java.util.*;
 
+import Inventory.Inventory;
+
 public class Game {
     GameContext gc;
 

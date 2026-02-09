@@ -1,8 +1,11 @@
 package core;
+
+import items.Weapon;
 public abstract class Character {
-    protected String name, currWeapon;
+    protected String name;
     protected int health;
     protected int damage;
+    protected Weapon currWeapon;
 
     public Character() {
         this.name = "Junting Xie";
@@ -20,7 +23,7 @@ public abstract class Character {
         this.damage = damage;
     }
 
-    public Character(String name, int health, int damage, String weapon) {
+    public Character(String name, int health, int damage, Weapon weapon) {
         this.name = name;
         this.health = health;
         this.damage = damage;
@@ -39,8 +42,12 @@ public abstract class Character {
         return health;
     }
 
-    public String getWeapon() {
+    public Weapon getWeapon() {
         return currWeapon;
+    }
+
+    public void switchWeapon(Weapon newWeapon) {
+        this.currWeapon = newWeapon;
     }
 
     public void takeDamage(int damageTaken) {

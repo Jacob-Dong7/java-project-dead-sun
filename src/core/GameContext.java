@@ -6,6 +6,8 @@ import control.*;
 import combat.*;
 import java.util.*;
 
+import Inventory.Inventory;
+
 public class GameContext {
     public final Player player;
     public final Stats stats;

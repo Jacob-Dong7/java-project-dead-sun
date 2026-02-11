@@ -8,6 +8,14 @@ public class Currency {
         this.total = amount;
     }
 
+    public boolean canAfford(int cost) {
+        if (this.total - cost <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public int getAmmount() {
         return this.total;
     }
@@ -20,3 +28,4 @@ public class Currency {
         this.total -= amount;
     }
 }
+

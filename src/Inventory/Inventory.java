@@ -9,12 +9,15 @@ public class Inventory {
     private ArrayList<HealingItem> medPouch;
     private ArrayList<Weapon> weaponSling;
     private Currency wallet;
+    private Ammo ammoPouch;
 
     private static final Scanner scnr = new Scanner(System.in);
+
     public Inventory() {
         wallet = new Currency(20); //start user off with 20 bucks
         medPouch = new ArrayList<>();
         weaponSling = new ArrayList<>();  
+        ammoPouch = new Ammo(2);
 
         medPouch.add(new HealingItem(Healing.BANDAGE, 2)); //start user off with 2 bandage
         weaponSling.add(Weapon.KNIFE); //starting weapon is knife
@@ -40,51 +43,47 @@ public class Inventory {
     }
 
     public void checkHeal(Player player) {
-        boolean found = false;
+        int input;
         if (player.getHealth() == 100) {
             System.out.println("You check your wounds, but there’s nothing to treat.");
             return;
         }
 
-        for (Item item : inventory) {
-            if (item.getName().equals("bandage")) {
-                if (item.getAmount() > 0) {
-                    found = true;
-                    heal(player);
-                    item.consume();
-                }
-            } 
+        for (int i = 0; i < medPouch.size(); ++i) {
+            System.out.println(i + 1 + " " + medPouch.get(i).getHeal().getName() + " Amount: " + medPouch.get(i).getAmount());
         }
 
-        if (found == false) {
-            System.out.println("You search your pack in panic, but find only blood-stained rags and nothing to use.");
+        input = scnr.nextInt() - 1;
+
+        if (input < 0 || input >= medPouch.size()) {
+            System.out.println("You fumble through your pack but grab nothing useful.");
             return;
         }
+
+
+        int healingFactor = medPouch.get(input).getHeal().getValue();
+        player.healBy(healingFactor);
+        
     }
 
-    //30 healing 80 110 - 100
-    public void heal(Player player) {
-        int health = player.getHealth();
-        if (health + 20 > 100) {
+    public void getAmmo() {
+        ammoPouch.getAmmo();
+    }
 
-            player.healBy(30 - ((health + 20) - 100));
+    public void useMoney(int amount) {
+        if (wallet.canAfford(amount) == true) {
+            wallet.decrease(amount);
         } else {
-            player.healBy(20);
+            System.out.println("You cannot afford to buy this");
         }
-        System.out.println("You bind the wound tightly, the bleeding slowing as the pain fades to a dull ache.")
     }
 
-    public int getAmmo() {
-
-        for (Item item : inventory) {
-            if (item.getName().equals("ammo")) {
-                int amount = item.getAmount();
-                return amount;
-            }
-        }
-
-        return 0;
+    public void getMoney() {
+        wallet.getAmmount();
     }
 
+    public void findMoney(int Amount) {
+        wallet.increase(Amount);
+    }
 }
 

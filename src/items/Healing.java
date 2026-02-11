@@ -22,5 +22,9 @@ public enum Healing {
         return this.name;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     
 }

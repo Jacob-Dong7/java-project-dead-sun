@@ -48,14 +48,21 @@ public abstract class Character {
 
     public void switchWeapon(Weapon newWeapon) {
         this.currWeapon = newWeapon;
+        System.out.println("==================================================");
+        System.out.println("Equipped Weapon: " + currWeapon.getName());
+        System.out.println("==================================================");
     }
 
     public void takeDamage(int damageTaken) {
         health -= damageTaken;
     }
 
-    public void healBy(int healing) {
-        health += healing;
+    public void healBy(int factor) {
+        if (health + factor >= 100) {
+            health = 100;
+        } else {
+            health += factor;
+        }
     }
 
 

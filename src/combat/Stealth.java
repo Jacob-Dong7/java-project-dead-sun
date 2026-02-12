@@ -11,7 +11,7 @@ public class Stealth {
         int boost = 8 * playerStat.getStealth();
         chance = random.nextInt(1, 100);
 
-        if (chance <= base) {
+        if (chance <= base + boost) {
             return true;
         } else {
             return false;

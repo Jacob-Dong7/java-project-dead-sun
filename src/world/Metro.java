@@ -150,7 +150,7 @@ public class Metro extends Map {
                             System.out.println("==================================================");
                             System.out.println("You attempted to sneak pass, but was caught");
                             System.out.println("==================================================");
-                            break;
+                            gc.combat.runEncounter(gc, map.get(i));
                         }
                     } else if (userInput == 2) {
                         gc.combat.runEncounter(gc, map.get(i));
@@ -158,8 +158,7 @@ public class Metro extends Map {
                         if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
                             break;
                         } else {
-                            gc.combat.fighting(gc, raider, map.get(i));
-                            break;                            
+                            gc.combat.runEncounter(gc, map.get(i));                       
                         }
                     }
                 } else {

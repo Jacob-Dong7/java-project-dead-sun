@@ -53,7 +53,7 @@ public abstract class Character {
         System.out.println("==================================================");
     }
 
-    public void takeDamage(int damageTaken) {
+    public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
     }
 
@@ -65,5 +65,15 @@ public abstract class Character {
         }
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public void killed(Weapon weapon) {
+        System.out.println("The target is dead");
+    }
 
+    public boolean tryAttack() {
+        System.out.println("The character attacks");
+        return true;
+    }
 }

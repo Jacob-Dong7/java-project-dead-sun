@@ -42,7 +42,7 @@ public class Inventory {
         
     }
 
-    public void checkHeal(Player player) {
+    public void heal(Player player) {
         int input;
         if (player.getHealth() == 100) {
             System.out.println("You check your wounds, but there’s nothing to treat.");
@@ -66,8 +66,8 @@ public class Inventory {
         
     }
 
-    public void getAmmo() {
-        ammoPouch.getAmmo();
+    public int getAmmo() {
+        return ammoPouch.getAmmo();
     }
 
     public void useMoney(int amount) {

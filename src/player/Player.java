@@ -2,11 +2,25 @@ package player;
 import java.util.*;
 
 import core.Character;
+import core.GameContext;
+import items.Weapon;
 
 public class Player extends Character {
     private final Scanner scnr = new Scanner(System.in);
+    private final Random random = new Random();
     private int input;
 
+    public void getStatus(GameContext gc) {
+        System.out.println("==================================================");
+        System.out.println("Name: " + name);
+        System.out.println("Strength: " + gc.stats.strength);
+        System.out.println("Charisma: " + gc.stats.charisma);
+        System.out.println("Stealth: " + gc.stats.stealth);
+        System.out.println();
+        System.out.println("Health: " + health);
+        System.out.println("Ammunition: " + gc.inventory.getAmmo());
+        System.out.println("==================================================");
+    }
     public void killed() {
         System.out.println(
             "==================================================\n" +
@@ -32,7 +46,7 @@ public class Player extends Character {
 
         //default health weapon and its damage 
         health = 100;
-        currWeapon = "Knife";
+        currWeapon = Weapon.KNIFE;
         damage = 20;
 
 
@@ -207,6 +221,16 @@ public class Player extends Character {
         }
     };
 
+    @Override
+    public boolean tryAttack() {
+        int hit = random.nextInt(0, 101); // 0 - 100% 
+        if (hit <= 80) { // 80 hit chance
+            return true;
+        } else {
+            System.out.println("You miss");
+            return false;
+        }       
+    }
 };
     
 

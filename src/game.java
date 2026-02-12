@@ -38,7 +38,6 @@ public class Game {
     public void start() {
         //start player creation and stats distribution
         gc.player.create(gc.stats);
-        gc.player.create(gc.stats);
         gc.player.intro();
 
         //level one metro station
@@ -47,7 +46,7 @@ public class Game {
 
         //level two maintenance tunnel
         maintenanceTunnel.populate();
-        maintenanceTunnel.play(playerControl, playerStat, playerStealth, playerSpeech);
+        maintenanceTunnel.play(gc);
     }
 
 }

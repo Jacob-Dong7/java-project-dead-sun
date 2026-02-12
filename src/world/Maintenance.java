@@ -1,13 +1,6 @@
 package world;
 import java.util.ArrayList;
-
-import player.*;
-
-import combat.*;
-
-import core.Map;
-import core.Dungeon;
-import control.Control;
+import core.*;
 
 public class Maintenance extends Map {
     private int randEnemy;
@@ -77,7 +70,7 @@ public class Maintenance extends Map {
         return description;
     }
 
-    public void play(Control playerControl, Stats playerStat, Stealth playerStealth, Speech playerSpeech) {
+    public void play(GameContext gc) {
         int userInput;
         for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
@@ -88,12 +81,12 @@ public class Maintenance extends Map {
                 } //if dungeon not cleared
                 else if (map.get(i).enemyCount() > 0) {
                     //goes to enemy present function in control.java
-                    userInput = playerControl.enemyPresent();
+                    userInput = gc.control.enemyPresent();
                     // gets user control that will determine what moves they do next.
 
                     //user selects 1 to sneak
                     if (userInput == 1) { 
-                        if (playerStealth.sneakAttempt(playerStat) == true) { //calls the sneak attemp function in stealth.java. will return true or false for if stealth success
+                        if (gc.stealth.sneakAttempt(gc.stats) == true) { //calls the sneak attemp function in stealth.java. will return true or false for if stealth success
                             System.out.println("==================================================");
                             System.out.println("You successfully sneaked pass");
                             System.out.println("==================================================");
@@ -102,22 +95,22 @@ public class Maintenance extends Map {
                             System.out.println("==================================================");
                             System.out.println("You attempted to sneak pass, but was caught");
                             System.out.println("==================================================");
-                            break;
+                            gc.combat.runEncounter(gc, map.get(i));
                         }
                     } else if (userInput == 2) { //user chooses to fight
-                        System.out.println("u kill");
+                        gc.combat.runEncounter(gc, map.get(i));
                         break;
                     } else if (userInput == 3) { //user chooses to talk to enemy. will be presented with options that will return true if successful
-                        if (playerSpeech.attemptSpeech(playerStat, 1, map.get(i).enemyCount()) == true) {
+                        if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
                             break;
                         } else {
-                            System.out.println("u kill");
+                            gc.combat.runEncounter(gc, map.get(i));
                             break;                            
                         }
                     }
                 } else {
                     //goes to no enemy present function in control.java
-                    userInput = playerControl.noEnemy();
+                    userInput = gc.control.noEnemy();
                     break;
                 }
             }

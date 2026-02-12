@@ -68,10 +68,13 @@ public class Combat {
 
             } else if (input == 2) { //user heal
                  gc.inventory.heal(gc.player);
+                 continue;
             } else if (input == 3) {
                 gc.inventory.switchWeapon(gc.player);
+                continue;
             } else if (input == 4) {
                 gc.player.getStatus(gc);
+                continue;
             } else {
                 System.out.println("Please select your next move");
                 continue;

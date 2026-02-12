@@ -44,8 +44,10 @@ public class Inventory {
 
     public void heal(Player player) {
         int input;
+        System.out.println("==================================================");
         if (player.getHealth() == 100) {
-            System.out.println("You check your wounds, but there’s nothing to treat.");
+            System.out.println("You check your wounds, but there's nothing to treat.");
+            System.out.println("==================================================");
             return;
         }
 
@@ -63,6 +65,9 @@ public class Inventory {
 
         int healingFactor = medPouch.get(input).getHeal().getValue();
         player.healBy(healingFactor);
+        player.healPrompt(medPouch.get(input).getHeal());
+        
+        System.out.println("==================================================");
         
     }
 
@@ -78,12 +83,21 @@ public class Inventory {
         }
     }
 
-    public void getMoney() {
-        wallet.getAmmount();
+    public int getMoney() {
+        return wallet.getAmmount();
     }
 
     public void findMoney(int Amount) {
         wallet.increase(Amount);
+    }
+
+    public void viewMedPouch() {
+            System.out.println("==================================================");
+            for(HealingItem medicine : medPouch) {
+                System.out.println(medicine.getHeal().getName() + " Amount: " + medicine.getAmount());
+            }
+            System.out.println("1 (Heal) -1 (Return)");
+            System.out.println("==================================================");
     }
 }
 

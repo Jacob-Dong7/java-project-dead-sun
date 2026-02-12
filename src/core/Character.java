@@ -1,5 +1,5 @@
 package core;
-
+import items.*;
 import items.Weapon;
 public abstract class Character {
     protected String name;

@@ -77,41 +77,15 @@ public class Maintenance extends Map {
             while (true) {
                 //if boss is present
                 if (map.get(i).bossPresent() == true) {
-
-                } //if dungeon not cleared
+                    //placeholder
+                }
+                
+                //if boss is not present but there are enemy
                 else if (map.get(i).enemyCount() > 0) {
-                    //goes to enemy present function in control.java
-                    userInput = gc.control.enemyPresent();
-                    // gets user control that will determine what moves they do next.
-
-                    //user selects 1 to sneak
-                    if (userInput == 1) { 
-                        if (gc.stealth.sneakAttempt(gc.stats) == true) { //calls the sneak attemp function in stealth.java. will return true or false for if stealth success
-                            System.out.println("==================================================");
-                            System.out.println("You successfully sneaked pass");
-                            System.out.println("==================================================");
-                            break;
-                        } else {
-                            System.out.println("==================================================");
-                            System.out.println("You attempted to sneak pass, but was caught");
-                            System.out.println("==================================================");
-                            gc.combat.runEncounter(gc, map.get(i));
-                        }
-                    } else if (userInput == 2) { //user chooses to fight
-                        gc.combat.runEncounter(gc, map.get(i));
-                        break;
-                    } else if (userInput == 3) { //user chooses to talk to enemy. will be presented with options that will return true if successful
-                        if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
-                            break;
-                        } else {
-                            gc.combat.runEncounter(gc, map.get(i));
-                            break;                            
-                        }
-                    }
+                    gc.control.enemyPresent(gc, map.get(i));
                 } else {
                     //goes to no enemy present function in control.java
-                    userInput = gc.control.noEnemy();
-                    break;
+                    gc.control.noEnemy(gc, map.get(i));
                 }
             }
         }

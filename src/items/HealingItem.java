@@ -1,7 +1,5 @@
 package items;
 
-import items.Healing;
-
 public class HealingItem {
     private int amount;
     private Healing item;
@@ -32,7 +30,7 @@ public class HealingItem {
         if (usedItem == Healing.BANDAGE) {
             System.out.println("You tear open a worn bandage packet with shaking fingers.");
             System.out.println("Cloth wraps tight around the wound, soaking slowly as you pull it firm.");
-            System.out.println("The bleeding eases. It’s not pretty, but it will hold.");
+            System.out.println("The bleeding eases. It's not pretty, but it will hold.");
         } else if (usedItem == Healing.MEDKIT) {
             System.out.println("You drop to one knee and snap open the medkit.");
             System.out.println("Disinfectant burns as you clean the wound, stitching and sealing with steady hands.");

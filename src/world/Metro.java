@@ -1,6 +1,6 @@
 package world;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import player.*;
 
@@ -134,36 +134,17 @@ public class Metro extends Map {
     }
 
     public void play(GameContext gc) {
-        int userInput;
         for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
             while (true) {
+                //if there is enemies present
                 if (map.get(i).enemyCount() > 0) {
-                    userInput = gc.control.enemyPresent();
-                    if (userInput == 1) {
-                        if (gc.stealth.sneakAttempt(gc.stats) == true) {
-                            System.out.println("==================================================");
-                            System.out.println("You successfully sneaked pass");
-                            System.out.println("==================================================");
-                            break;
-                        } else {
-                            System.out.println("==================================================");
-                            System.out.println("You attempted to sneak pass, but was caught");
-                            System.out.println("==================================================");
-                            gc.combat.runEncounter(gc, map.get(i));
-                        }
-                    } else if (userInput == 2) {
-                        gc.combat.runEncounter(gc, map.get(i));
-                    } else if (userInput == 3) {
-                        if (gc.speech.attemptSpeech(gc.stats, 1, map.get(i).enemyCount()) == true) {
-                            break;
-                        } else {
-                            gc.combat.runEncounter(gc, map.get(i));                       
-                        }
-                    }
-                } else {
-                    userInput = gc.control.noEnemy();
-                    break;
+                    gc.control.enemyPresent(gc, map.get(i));
+                } 
+
+                //if there are no enemies present
+                else {
+                    gc.control.noEnemy(gc, map.get(i));
                 }
             }
         }

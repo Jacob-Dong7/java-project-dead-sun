@@ -1,16 +1,20 @@
-package combat;
+package gameplay;
 import core.*;
 import core.Character;
 import enemy.*;
 import items.Weapon;
+import player.Player;
 
 import java.util.*;
 public class Combat {
     private static final Scanner scnr = new Scanner(System.in);
 
     //character one attacks character two
-    public void attack(Character attacker, Character defender, Weapon weapon) {
+    public void attack(Character attacker, Character defender, Weapon weapon, GameContext gc) {
         int weaponDamage = weapon.getDamage();
+        if (attacker instanceof Player) {
+            weaponDamage += gc.stats.getStrength();
+        }
         if (attacker.tryAttack() == true) {
             if (defender.getHealth() <= 0) return;
             if (defender.getHealth() - weaponDamage <= 0) {
@@ -18,6 +22,7 @@ public class Combat {
                 return;
             }
             defender.takeDamage(weaponDamage, weapon);
+            
         }
     }
 
@@ -64,7 +69,7 @@ public class Combat {
             if (enemyHealth(enemies, map, gc) == false) {
                 continue;
             }
-            attack(gc.player, enemies.get(0), gc.player.getWeapon());
+            attack(gc.player, enemies.get(0), gc.player.getWeapon(), gc);
 
             } else if (input == 2) { //user heal
                  gc.inventory.heal(gc.player);
@@ -83,18 +88,18 @@ public class Combat {
             if (enemyHealth(enemies, map, gc) == false) {
                 continue;
             }
-
-            System.out.println("==================================================");
-            System.out.println("Enemy Health: " + enemies.get(0).getHealth());
-            System.out.println("Your Health: " + gc.player.getHealth());
-            System.out.println("==================================================");
             
             //enemy attack backs depending on how many there are
             if (enemies.isEmpty()) break;
 
             for (Character enemy : enemies) {
-                attack(enemy, gc.player, enemy.getWeapon());
+                attack(enemy, gc.player, enemy.getWeapon(), gc);
             }
+
+            System.out.println("==================================================");
+            System.out.println("Enemy Health: " + enemies.get(0).getHealth());
+            System.out.println("Your Health: " + gc.player.getHealth());
+            System.out.println("==================================================");
         }
 }
     

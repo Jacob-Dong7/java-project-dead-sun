@@ -41,20 +41,6 @@ public class Dungeon {
         return enemyType;
     }
 
-
-
-    public int ammo() {
-        return ammo;
-    }
-    public int heal() {
-        return heal;
-    }
-    public int scraps() {
-        return scraps;
-    }
-    public int money() {
-        return money;
-    }
     public int enemyCount() {
         return enemyCount;
     }

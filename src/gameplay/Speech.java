@@ -1,4 +1,4 @@
-package combat;
+package gameplay;
 
 import player.Stats;
 import java.util.*;
@@ -11,6 +11,8 @@ public class Speech {
     public boolean attemptSpeech(Stats playerStat, int map, int enemyCount) {
         //speech for first section, metro station
         while (true) {
+
+            //map dependent
             if (map == 1) {
                 if (enemyCount == 1) {
                     System.out.println("==================================================");
@@ -31,6 +33,8 @@ public class Speech {
 
             }
 
+
+            //user choices
             if (choice == 1) {
                 System.out.println("==================================================");
                 System.out.println("You push forward, unflinching.");

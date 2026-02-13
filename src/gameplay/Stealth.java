@@ -1,4 +1,4 @@
-package combat;
+package gameplay;
 import player.Stats;
 import java.util.Random;
 

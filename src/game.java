@@ -1,22 +1,18 @@
 import player.*;
 import world.*;
 import core.*;
+import gameplay.*;
 import control.*;
-import combat.*;
+
 import java.util.*;
 
 import Inventory.Inventory;
 
 public class Game {
     GameContext gc;
-
     ArrayList<Dungeon> currMap;
     Maintenance maintenanceTunnel;
     Metro metroStation;
-
-
-    
-    private static final Scanner scnr = new Scanner(System.in);
 
     public Game() {   
         Player p = new Player();
@@ -26,8 +22,9 @@ public class Game {
         Stealth st = new Stealth();
         Speech sp = new Speech();
         Combat ct = new Combat();
+        Looting lt = new Looting();
         
-        gc = new GameContext(p, s, i, st, sp, c, ct);
+        gc = new GameContext(p, s, i, st, sp, c, ct, lt);
 
         //maps
         maintenanceTunnel = new Maintenance();

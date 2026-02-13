@@ -237,17 +237,27 @@ public class Player extends Character {
             System.out.println("A cold rush floods your veins, numbing pain and sharpening your focus.");
             System.out.println("Your vision clears. The weakness fades — for now.");
         }
-        System.out.println("+ " + usedItem.getHeal() + " Health");
+        System.out.println("You recovered" + usedItem.getHeal() + " HP");
+        System.out.println("Your HP: " + health + " / 100");
         System.out.println("==================================================");
     }
 
     @Override
+    public void takeDamage(int damageTaken, Weapon weapon) {
+        health -= damageTaken;
+        System.out.println("\nThe enemy dealt " + damageTaken + " damage to you");
+        System.out.println("Your HP: " + health + " / 100");
+        System.out.println("==================================================");
+    }
+    @Override
     public boolean tryAttack() {
-        int hit = random.nextInt(0, 101); // 0 - 100% 
+        int hit = random.nextInt(1, 101); // 1 - 100% 
         if (hit <= 80) { // 80 hit chance
             return true;
         } else {
-            System.out.println("You miss");
+            System.out.println("==================================================");
+            System.out.println("You attack and misses");
+            System.out.println("==================================================");
             return false;
         }       
     }

@@ -5,6 +5,7 @@ public class Control {
     private static final Scanner scnr = new Scanner(System.in);
     int userInput;
     public void enemyPresent(GameContext gc, Dungeon map) {
+        gc.looting.generate(map.enemyCount());
         while (true) {
             System.out.println("==================================================");
             System.out.println("1 (Sneak Pass) 2 (Attack) 3 (Talk) 4 (Inventory) 5 (Switch Weapon) 6 (Check Status)");
@@ -21,15 +22,17 @@ public class Control {
                     System.out.println("You attempted to sneak pass, but was caught");
                     System.out.println("==================================================");
                     gc.combat.runEncounter(gc, map);
+                    break;
             }
         } else if (userInput == 2) {
             gc.combat.runEncounter(gc, map);
+            break;
         } else if (userInput == 3) {
-            if (gc.speech.attemptSpeech(gc.stats, 1, map.enemyCount()) == true) {
-                break;
-            } else {
-                gc.combat.runEncounter(gc, map);                       
+            if (gc.speech.attemptSpeech(gc.stats, 1, map.enemyCount()) == false) {
+                gc.combat.runEncounter(gc, map);  
             }
+            map.removeEnemy(map.enemyCount());
+            break;
             //view inventory
         } else if (userInput == 4) { 
             int open;
@@ -77,7 +80,7 @@ public class Control {
             if (userInput == 1) {
                 break;
             } else if (userInput == 2) {
-                System.out.println("Loot");
+                gc.looting.loot(gc.inventory.getMedPouch());
                 continue;
             } else if (userInput == 3) {
                 int open;

@@ -1,5 +1,4 @@
 package core;
-import items.*;
 import items.Weapon;
 public abstract class Character {
     protected String name;
@@ -8,7 +7,7 @@ public abstract class Character {
     protected Weapon currWeapon;
 
     public Character() {
-        this.name = "Junting Xie";
+        this.name = "Player";
         this.health = 100;
         this.damage = 0;
     }

@@ -71,13 +71,13 @@ public class Maintenance extends Map {
     }
 
     public void play(GameContext gc) {
-        int userInput;
         for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
             while (true) {
                 //if boss is present
                 if (map.get(i).bossPresent() == true) {
-                    //placeholder
+                    System.out.println("U kill the boss");
+                    break;
                 }
                 
                 //if boss is not present but there are enemy
@@ -87,8 +87,12 @@ public class Maintenance extends Map {
                     //goes to no enemy present function in control.java
                     gc.control.noEnemy(gc, map.get(i));
                 }
+
+                break;
             }
         }
-        completed = true;
+        System.out.println("You escape the maintenace tunnel");
     }
+
+
 }

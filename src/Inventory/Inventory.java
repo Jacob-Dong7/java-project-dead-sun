@@ -87,8 +87,16 @@ public class Inventory {
         return wallet.getAmmount();
     }
 
-    public void findMoney(int Amount) {
-        wallet.increase(Amount);
+    public void findAmmo(int amount) {
+        ammoPouch.findAmmo(amount);
+    }
+
+    public void findMoney(int amount) {
+        wallet.increase(amount);
+    }
+
+    public ArrayList<HealingItem> getMedPouch() {
+        return medPouch;
     }
 
     public void viewMedPouch() {

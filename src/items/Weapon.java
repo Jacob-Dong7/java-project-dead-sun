@@ -2,9 +2,9 @@ package items;
 public enum Weapon {
     KNIFE(20, "Rusted Shiv", false),
     CLEAVER(25, "Chipped Cleaver", false),
-    PISTOL(30, "Rusted Type 92 Compact", true),
-    RIFLE(35, "Old Type 56 Rifle", true),
-    ADVANCERIFLE(50, "Type 95 Rifle", true);
+    PISTOL(30, "Rusted Homemade Pistol", true),
+    RIFLE(35, "Homemade Assualt Rifle", true),
+    ADVANCERIFLE(50, "Old World Rifle", true);
 
 
     final int damage;

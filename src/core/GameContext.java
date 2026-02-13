@@ -1,10 +1,8 @@
 package core;
 import player.*;
-import world.*;
-import core.*;
+import gameplay.*;
 import control.*;
-import combat.*;
-import java.util.*;
+
 
 import Inventory.Inventory;
 
@@ -16,8 +14,9 @@ public class GameContext {
     public final Speech speech;
     public final Control control;
     public final Combat combat;
+    public final Looting looting;
 
-    public GameContext(Player p, Stats s, Inventory i, Stealth st, Speech sp, Control c, Combat ct) {
+    public GameContext(Player p, Stats s, Inventory i, Stealth st, Speech sp, Control c, Combat ct, Looting lt) {
         this.player = p;
         this.stats = s;
         this.inventory = i;
@@ -25,5 +24,6 @@ public class GameContext {
         this.speech = sp;
         this.control = c;
         this.combat = ct;
+        this.looting = lt;
     }
 }

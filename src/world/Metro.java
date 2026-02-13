@@ -2,14 +2,9 @@ package world;
 
 import java.util.*;
 
-import player.*;
-
-import combat.*;
-
 import core.Map;
 import core.Dungeon;
 import core.GameContext;
-import control.Control;
 
 import enemy.Raiders;
 
@@ -140,11 +135,12 @@ public class Metro extends Map {
                 //if there is enemies present
                 if (map.get(i).enemyCount() > 0) {
                     gc.control.enemyPresent(gc, map.get(i));
+                    continue;
                 } 
-
                 //if there are no enemies present
                 else {
                     gc.control.noEnemy(gc, map.get(i));
+                    break;
                 }
             }
         }

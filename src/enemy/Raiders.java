@@ -17,6 +17,9 @@ public class Raiders extends Character{
     public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
         prompt(weapon, "damage");
+        System.out.println("\nYou dealt " + damageTaken + " damage.");
+        System.out.println("Black Torch Raider HP: " + String.valueOf(health) + " / 50");
+        System.out.println("==================================================");
     }
 
     @Override
@@ -135,7 +138,6 @@ public class Raiders extends Character{
                     break;
             }           
         }
-       System.out.println("==================================================");
     }
 
     @Override
@@ -146,18 +148,18 @@ public class Raiders extends Character{
         if (hit <= 40) {
             switch (variety) {
                 case 1:
-                    System.out.println("The Black Torch swings his burning torch in a wide arc, embers scattering across the floor.\n");
+                    System.out.println("The Black Torch swings his burning torch in a wide arc, embers scattering across the floor.");
                     break;
                 case 2:
-                    System.out.println("Flames roar as the raider thrusts the torch forward, heat searing the air around you.\n");
+                    System.out.println("Flames roar as the raider thrusts the torch forward, heat searing the air around you.");
                     break;
                 case 3:
-                    System.out.println("The torch crashes down toward your head, sparks bursting on impact.\n");
+                    System.out.println("The torch crashes down toward your head, sparks bursting on impact.");
                     break;
             }
             return true;
         } else {
-            System.out.println("The Black Torch overextends, the torch whistling past you and missing entirely.");
+            System.out.println("The Black Torch swings wildly, missing you entirely.");
             return false;
         }
     }

@@ -7,6 +7,7 @@ public class Dungeon {
     protected String enemyType;
     protected int ammo, heal, money, scraps;
     protected String[] description;
+    protected boolean looted; //used to insure one dungeon can be looted once
 
     protected boolean boss;
 
@@ -20,6 +21,15 @@ public class Dungeon {
         this.scraps = scraps;
         this.boss = boss;
         this.description = description;
+        this.looted = false;
+    }
+
+    public boolean isLooted() {
+        return looted;
+    }
+
+    public void loot() {
+        looted = true;
     }
 
     public void removeEnemy(int num) {

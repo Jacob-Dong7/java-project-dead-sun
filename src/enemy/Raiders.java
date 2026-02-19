@@ -105,7 +105,7 @@ public class Raiders extends Character{
             switch (randomChance) {
                 case 1:
                     System.out.println("You steady your grip and squeeze the trigger.");
-                    System.out.println("The Rusted Type 92 cracks through the tunnel.");
+                    System.out.println("The Rusted pistol cracks through the tunnel.");
                     System.out.println("The bullet punches into the raider's chest, sending him stumbling backward.");
                     break;
                 case 2:
@@ -114,7 +114,7 @@ public class Raiders extends Character{
                     System.out.println("The Black Torch clutches his shoulder, shock flashing in his eyes.");
                     break;
                 case 3:
-                    System.out.println("You fire once — precise and cold.");
+                    System.out.println("You fire once - precise and cold.");
                     System.out.println("The muzzle flash lights the dark for a split second.");
                     System.out.println("The raider drops to a knee, struggling to breathe.");
                     break;

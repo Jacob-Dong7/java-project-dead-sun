@@ -237,7 +237,7 @@ public class Player extends Character {
             System.out.println("A cold rush floods your veins, numbing pain and sharpening your focus.");
             System.out.println("Your vision clears. The weakness fades — for now.");
         }
-        System.out.println("You recovered" + usedItem.getHeal() + " HP");
+        System.out.println("You recovered " + usedItem.getHeal() + " HP");
         System.out.println("Your HP: " + health + " / 100");
         System.out.println("==================================================");
     }

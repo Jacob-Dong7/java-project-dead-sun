@@ -55,22 +55,24 @@ public class Combat {
             }
                     
             if (input == 1) { //player attack
+                if (enemyHealth(enemies, map, gc) == false) {
+                    continue;
+                }
                 //checks if player uses guns
                 if (gc.player.getWeapon().isRanged() == true) {
                      if (gc.inventory.getAmmo() <= 0) {
                         System.out.println("You are out of ammo");
                         continue;
                     } 
+                    gc.inventory.useAmmo();
                 }
-
-            //attacks
 
             //checks if enemy is dead before attack first. false means current is dead
             if (enemyHealth(enemies, map, gc) == false) {
                 continue;
             }
             attack(gc.player, enemies.get(0), gc.player.getWeapon(), gc);
-
+            
             } else if (input == 2) { //user heal
                  gc.inventory.heal(gc.player);
                  continue;

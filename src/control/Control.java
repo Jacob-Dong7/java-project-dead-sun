@@ -4,8 +4,9 @@ import core.*;
 public class Control {
     private static final Scanner scnr = new Scanner(System.in);
     int userInput;
+    int maxEnemyCount;
     public void enemyPresent(GameContext gc, Dungeon map) {
-        gc.looting.generate(map.enemyCount());
+        this.maxEnemyCount = map.enemyCount();
         while (true) {
             System.out.println("==================================================");
             System.out.println("1 (Sneak Pass) 2 (Attack) 3 (Talk) 4 (Inventory) 5 (Switch Weapon) 6 (Check Status)");
@@ -80,7 +81,13 @@ public class Control {
             if (userInput == 1) {
                 break;
             } else if (userInput == 2) {
-                gc.looting.loot(gc.inventory.getMedPouch());
+                if (map.isLooted() == false) {
+                    gc.looting.loot(gc.inventory.getMedPouch(), gc, maxEnemyCount);
+                } else {
+                    System.out.println("You have already looted everything you can");
+                }
+
+                map.loot();
                 continue;
             } else if (userInput == 3) {
                 int open;

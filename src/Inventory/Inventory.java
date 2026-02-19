@@ -21,6 +21,7 @@ public class Inventory {
 
         medPouch.add(new HealingItem(Healing.BANDAGE, 2)); //start user off with 2 bandage
         weaponSling.add(Weapon.KNIFE); //starting weapon is knife
+        weaponSling.add(Weapon.PISTOL);
     }
 
     public void switchWeapon(Player player) {
@@ -63,9 +64,14 @@ public class Inventory {
         }
 
 
+        if (medPouch.get(input).getAmount() <= 0) {
+            System.out.println("You have ran out of the healing item you want");
+            return;
+        }
         int healingFactor = medPouch.get(input).getHeal().getValue();
         player.healBy(healingFactor);
         player.healPrompt(medPouch.get(input).getHeal());
+        medPouch.get(input).useItem();
         
         System.out.println("==================================================");
         
@@ -75,6 +81,9 @@ public class Inventory {
         return ammoPouch.getAmmo();
     }
 
+    public void useAmmo() {
+        ammoPouch.useAmmo();
+    }
     public void useMoney(int amount) {
         if (wallet.canAfford(amount) == true) {
             wallet.decrease(amount);
@@ -101,9 +110,6 @@ public class Inventory {
 
     public void viewMedPouch() {
             System.out.println("==================================================");
-            for(HealingItem medicine : medPouch) {
-                System.out.println(medicine.getHeal().getName() + " Amount: " + medicine.getAmount());
-            }
             System.out.println("1 (Heal) -1 (Return)");
             System.out.println("==================================================");
     }

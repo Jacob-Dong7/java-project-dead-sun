@@ -6,14 +6,13 @@ import core.GameContext;
 import items.Healing;
 import items.HealingItem;
 public class Looting {
-    protected int ammo, heal, money, scraps, enemyCount;
+    protected int ammo, heal, money, enemyCount;
     private final Random random = new Random();
 
     public Looting() {
         this.ammo = 0;
         this.heal = 0;
         this.money = 0;
-        this.scraps = 0;
         this.enemyCount = 0;
     }
 
@@ -25,28 +24,33 @@ public class Looting {
             this.heal += random.nextInt(0, 2);
             this.money += random.nextInt(0, 100);
         }
-
-        this.scraps = random.nextInt(0, 4);
     }
 
     public boolean findLoot() {
-        if (this.ammo == 0 && this.heal == 0 && this.money == 0 && this.scraps == 0) {
+        if (this.ammo == 0 && this.heal == 0 && this.money == 0) {
             return false;
         } 
         return true;
     }
 
-    public void loot(ArrayList<HealingItem> getMedPouch) {
+    public void loot(ArrayList<HealingItem> getMedPouch, GameContext gc, int enemy) {
+        generate(enemy);
         System.out.println("==================================================");
         if (findLoot() == true) {
             if (enemyCount > 1) {
-                System.out.println("You search the area around you and through the bodies and found: ");
-                if (this.ammo > 0) System.out.println("Ammunition: " + ammo);
-                if (this.money > 0) System.out.println("Money: $" + money);
-                if (this.scraps > 0) System.out.println("Scraps: " + scraps);
+                System.out.println("You search through the area and the " + enemy + " bodies and found:");
+                if (this.ammo > 0) {
+                    System.out.println("Ammunition: " + ammo) ;
+                    gc.inventory.findAmmo(ammo);
+                }
+                if (this.money > 0) {
+                    System.out.println("Money: $" + money);
+                    gc.inventory.findMoney(money);
+                }
 
                 if (this.heal > 0) {
-                    System.out.println("Medicine: " + heal + ":");
+                    System.out.println("Medicine: " + heal);
+                    System.out.println("The Medicine includes:");
                     generateMeds(getMedPouch);
                 }
             }
@@ -54,22 +58,27 @@ public class Looting {
             System.out.println("You search but found nothing");
         }
         System.out.println("==================================================");
-    
+    clear();
+    return;
     }
 
     public void generateMeds(ArrayList<HealingItem> medPouch) {
-        System.out.println("==================================================");
         for (int i = 0; i < heal; ++i) {
-            int chance = random.nextInt(1, 4);
+            boolean found = false; 
+            int chance = random.nextInt(1, 4); // 1-3
             switch (chance) {
                 case 1:
                     for (HealingItem med : medPouch) {
                         if (med.getHeal() == Healing.BANDAGE) {
                             med.findItem();
                             System.out.println("You find a Bandage");
-                        } else {
-                            medPouch.add(new HealingItem(Healing.BANDAGE, 1));
+                            found = true;
+                            break;
                         }
+                    }
+
+                    if (found == false) {
+                        medPouch.add(new HealingItem(Healing.BANDAGE, 1));
                     }
 
                 break;
@@ -79,38 +88,42 @@ public class Looting {
                         if (med.getHeal() == Healing.MEDKIT) {
                             med.findItem();
                             System.out.println("You find a Medkit");
-                        } else {
-                            medPouch.add(new HealingItem(Healing.MEDKIT, 1));
+                            found = true;
+                            break;
                         }
                     } 
+                    if (found == false) {
+                        System.out.println("You find a Medkit");
+                        System.out.println("(New item added to Medical Pouch)");
+                        medPouch.add(new HealingItem(Healing.MEDKIT, 1));
+                    }
+
                     break;
+
                 case 3:
                     for (HealingItem med : medPouch) {
                         if (med.getHeal() == Healing.SYRINGE) {
                             med.findItem();
                             System.out.println("You find a Syringe");
-                        } else {
-                            medPouch.add(new HealingItem(Healing.SYRINGE, 1));
+                            found = true;
+                            break;
                         }
                     }    
-                        break;          
+                    if (found == false) {
+                        System.out.println("You find a Syringe");
+                        System.out.println("(New item added to Medical Pouch)");
+                        medPouch.add(new HealingItem(Healing.SYRINGE, 1));
+                    }
+                    break;          
                 }
     
             }
-        System.out.println("==================================================");
         }
-
-    public void add(GameContext gc) {
-        gc.inventory.findMoney(money);
-        gc.inventory.findAmmo(ammo);
-        
-    }
 
     public void clear() {
         this.ammo = 0;
         this.heal = 0;
         this.money = 0;
-        this.scraps = 0;
         this.enemyCount = 0;
     }
 

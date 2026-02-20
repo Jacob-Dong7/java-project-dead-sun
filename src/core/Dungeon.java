@@ -1,10 +1,9 @@
 package core;
-import java.util.*;
 
 public class Dungeon {
     protected String name;
     protected int enemyCount;
-    protected String enemyType;
+    protected String enemyType, bossType;
     protected int ammo, heal, money, scraps;
     protected String[] description;
     protected boolean looted; //used to insure one dungeon can be looted once
@@ -12,6 +11,10 @@ public class Dungeon {
     protected boolean boss;
 
     public Dungeon(String name, int enemyCount, String enemyType, int ammo, int heal, int money, int scraps, boolean boss, String[] description) {
+        this(name, enemyCount, enemyType, ammo, heal, money, scraps, boss, description, null);
+    }
+
+    public Dungeon(String name, int enemyCount, String enemyType, int ammo, int heal, int money, int scraps, boolean boss, String[] description, String bossType) {
         this.name = name;
         this.enemyCount = enemyCount;
         this.enemyType = enemyType;
@@ -22,6 +25,7 @@ public class Dungeon {
         this.boss = boss;
         this.description = description;
         this.looted = false;
+        this.bossType = bossType;
     }
 
     public boolean isLooted() {
@@ -53,6 +57,10 @@ public class Dungeon {
 
     public int enemyCount() {
         return enemyCount;
+    }
+
+    public String getBossType() {
+        return bossType;
     }
 
 }

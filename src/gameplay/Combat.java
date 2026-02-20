@@ -31,6 +31,13 @@ public class Combat {
 
     public void runEncounter(GameContext gc, Dungeon map) {
         ArrayList<Character> enemies = new ArrayList<>();
+        if (map.bossPresent()) {
+            if (map.getBossType().equals("raider boss")) {
+                RaiderBoss boss = new RaiderBoss();
+                enemies.add(boss);
+            }
+        }
+        
         for (int i = 0; i < map.enemyCount(); ++i) {
             if (map.getEnemyType().equals("raider")) {
                 Raiders raider = new Raiders();

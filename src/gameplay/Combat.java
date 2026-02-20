@@ -30,13 +30,15 @@ public class Combat {
     //packs the enemies into an arraylist
 
     public void runEncounter(GameContext gc, Dungeon map) {
-        ArrayList<Character> enemies = new ArrayList<>();
         if (map.bossPresent()) {
             if (map.getBossType().equals("raider boss")) {
                 RaiderBoss boss = new RaiderBoss();
-                enemies.add(boss);
+                fightBoss(gc, boss, map);
             }
+            return;
         }
+
+        ArrayList<Character> enemies = new ArrayList<>();
         
         for (int i = 0; i < map.enemyCount(); ++i) {
             if (map.getEnemyType().equals("raider")) {
@@ -110,7 +112,75 @@ public class Combat {
             System.out.println("Your Health: " + gc.player.getHealth());
             System.out.println("==================================================");
         }
-}
+    }
+
+    public void fightBoss(GameContext gc, Character boss, Dungeon map) {
+        int input;
+        while (true) {
+            System.out.println("==================================================");
+            System.out.println("1 (Attack) 2 (Heal) 3 (Switch Weapons) 4 (Check Status)");
+            System.out.println("==================================================");
+            input = scnr.nextInt();
+            if (verifyControl(input) == false ) {
+                System.out.println("Choose your next move");
+                continue;
+            }
+                    
+            if (input == 1) { //player attack
+                if (boss.getHealth() <= 0) {
+                    boss.killed(gc.player.getWeapon());
+                    map.removeBoss();
+                    return;
+                }
+                //checks if player uses guns
+                if (gc.player.getWeapon().isRanged() == true) {
+                     if (gc.inventory.getAmmo() <= 0) {
+                        System.out.println("You are out of ammo");
+                        continue;
+                    } 
+                    gc.inventory.useAmmo();
+                }
+
+            //checks if enemy is dead before attack first. false means current is dead
+            if (boss.getHealth() <= 0) {
+                boss.killed(gc.player.getWeapon());
+                map.removeBoss();
+                 return;
+            }
+
+            attack(gc.player, boss, gc.player.getWeapon(), gc);
+            
+            } else if (input == 2) { //user heal
+                 gc.inventory.heal(gc.player);
+                 continue;
+            } else if (input == 3) {
+                gc.inventory.switchWeapon(gc.player);
+                continue;
+            } else if (input == 4) {
+                gc.player.getStatus(gc);
+                continue;
+            } else {
+                System.out.println("Please select your next move");
+                continue;
+            }
+
+            if (boss.getHealth() <= 0) {
+                boss.killed(gc.player.getWeapon());
+                map.removeBoss();
+                return;
+            }
+
+            attack(boss, gc.player, boss.getWeapon(), gc);
+
+
+            System.out.println("==================================================");
+            System.out.println("Enemy Health: " + boss.getHealth());
+            System.out.println("Your Health: " + gc.player.getHealth());
+            System.out.println("==================================================");
+        }
+    }
+
+
     
     public boolean playerStatus(GameContext gc) {
         if (gc.player.getHealth() <= 0) {

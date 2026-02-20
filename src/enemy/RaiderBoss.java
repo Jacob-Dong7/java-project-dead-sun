@@ -10,13 +10,14 @@ public class RaiderBoss extends Character {
         this.name = "The Butcher";
         this.health = 150;
         this.damage = 30;
+        currWeapon = Weapon.CLEAVER;
     }
     @Override
     public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
         prompt(weapon, "damage");
         System.out.println("\nYou dealt " + damageTaken + " damage.");
-        System.out.println("Black Torch Raider HP: " + String.valueOf(health) + " / 50");
+        System.out.println("The Butcher's HP: " + String.valueOf(health) + " / 150");
         System.out.println("==================================================");
     }
 

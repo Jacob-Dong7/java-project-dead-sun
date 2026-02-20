@@ -35,10 +35,10 @@ public class Looting {
 
     public void loot(ArrayList<HealingItem> getMedPouch, GameContext gc, int enemy) {
         generate(enemy);
+        System.out.println(enemy);
         System.out.println("==================================================");
         if (findLoot() == true) {
-            if (enemyCount > 1) {
-                System.out.println("You search through the area and the " + enemy + " bodies and found:");
+                System.out.println("You check the area and gather anything useful. You found:");
                 if (this.ammo > 0) {
                     System.out.println("Ammunition: " + ammo) ;
                     gc.inventory.findAmmo(ammo);
@@ -53,7 +53,6 @@ public class Looting {
                     System.out.println("The Medicine includes:");
                     generateMeds(getMedPouch);
                 }
-            }
         } else {
             System.out.println("You search but found nothing");
         }

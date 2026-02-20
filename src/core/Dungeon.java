@@ -43,6 +43,11 @@ public class Dungeon {
         return description;
     }
 
+    public void removeBoss() {
+        this.boss = false;
+        this.bossType = null;
+    }
+
     public boolean bossPresent() {
         return boss;
     }

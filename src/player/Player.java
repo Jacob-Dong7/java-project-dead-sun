@@ -13,14 +13,18 @@ public class Player extends Character {
 
     public void getStatus(GameContext gc) {
         System.out.println("==================================================");
+        System.out.println("STATUS");
+        System.out.println("==================================================");
         System.out.println("Name: " + name);
         System.out.println("Strength: " + gc.stats.strength);
         System.out.println("Charisma: " + gc.stats.charisma);
         System.out.println("Stealth: " + gc.stats.stealth);
         System.out.println();
         System.out.println("Health: " + health);
+        System.out.println("Money: " + gc.inventory.getMoney());
         System.out.println("Ammunition: " + gc.inventory.getAmmo());
-        System.out.println("==================================================");
+         System.out.println("==================================================");
+    
     }
     public void killed() {
         System.out.println(
@@ -34,6 +38,7 @@ public class Player extends Character {
             "\n" + 
             name + " is gone.\n" +
             "The ash endures.\n" +
+            "YOU HAVE DIED\n" +
             "GAME OVER\n" +
              "==================================================" 
         );
@@ -41,8 +46,8 @@ public class Player extends Character {
     }
 
     public void create(Stats playerStat) {
-        System.out.println("==================================================");
-        System.out.println("Character Creation");
+        System.out.println("\n\nCHARACTER CREATION");
+        System.out.println("--------------------------------------------------");
         System.out.println("Please enter your name: ");
 
         //default health weapon and its damage 
@@ -245,9 +250,7 @@ public class Player extends Character {
     @Override
     public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
-        System.out.println("\nThe enemy dealt " + damageTaken + " damage to you");
-        System.out.println("Your HP: " + health + " / 100");
-        System.out.println("==================================================");
+        System.out.println("(" + damageTaken + " DMG)");
     }
     @Override
     public boolean tryAttack() {

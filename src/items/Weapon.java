@@ -1,8 +1,8 @@
 package items;
 public enum Weapon {
-    KNIFE(20, "Rusted Shiv", false),
-    CLEAVER(25, "Chipped Cleaver", false),
-    PISTOL(30, "Rusted Homemade Pistol", true),
+    KNIFE(20, "Shiv", false),
+    CLEAVER(25, "Cleaver", false),
+    PISTOL(30, "Homemade Pistol", true),
     RIFLE(35, "Homemade Assualt Rifle", true),
     ADVANCERIFLE(50, "Old World Rifle", true);
 

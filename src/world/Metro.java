@@ -23,9 +23,9 @@ public class Metro extends Map {
         map = new ArrayList<>();
 
         //populate the dungeon
-        map.add(new Dungeon("Platform C", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
-        map.add(new Dungeon("Concourse", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descTwo(randEnemy)));
-        map.add(new Dungeon("Service Access", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descThree(randEnemy)));
+        map.add(new Dungeon("Platform C", randEnemy = generateEnemy(), "raider", false, descOne(randEnemy)));
+        map.add(new Dungeon("Concourse", randEnemy = generateEnemy(), "raider", false, descTwo(randEnemy)));
+        map.add(new Dungeon("Service Access", randEnemy = generateEnemy(), "raider", false, descThree(randEnemy)));
     }
 
     //description for each dungeon. Layout is exactly same for pretty much all rooms.
@@ -145,6 +145,7 @@ public class Metro extends Map {
             }
         }
         System.out.println("You descend the stairwell.\nValves hiss somewhere below.");
+        System.out.println("(You have advanced to the next level)");
     }
 }
 

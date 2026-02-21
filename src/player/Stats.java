@@ -15,7 +15,7 @@ public class Stats {
 
     public void statAssign() {
         System.out.println("==================================================");
-        System.out.println("Assign You Stats:");
+        System.out.println("ASSIGN YOUR ATTRIBUTES:");
         
         //while loop created for stat creation
         while (points > 0) {
@@ -23,25 +23,30 @@ public class Stats {
         //tells user how many points remain
         if (points > 1) {
             System.out.println(
+                "You have " +
                 points +
-                " skill points remaining"
+                " skill points remaining."
             );
         } else if (points == 1) {
-            System.out.println("1 skill point remaining");
+            System.out.println("You have 1 skill point remaining.");
         }
 
         System.out.println(
-            "===============================\n" +
-            "Current Stats:\n" +
-            "Strength: " + strength + "\n" +
-            "Charisma: " + charisma + "\n" + 
-            "Stealth: " + stealth +
-            "\n==============================="
+            "CURRENT ATTRIBUTES:\n" +
+            "--------------------------------------------------\n" +
+            "Strength:   " + strength + "\n" +
+            "Charisma:   " + charisma + "\n" + 
+            "Stealth:    " + stealth +
+            "\n--------------------------------------------------\n\n"
         );
 
-        System.out.println("==================================================");
-        System.out.println("1 (Strength) 2 (Charisma) 3 (Stealth) 4 (Reset)");
-        System.out.println("==================================================");
+        System.out.println("1.  Strength");
+        System.out.println("2.  Charisma");
+        System.out.println("3.  Stealth");
+        System.out.println("4.  Reset Points");
+
+
+        System.out.println("\n\n==================================================");
 
         input = scnr.nextInt();
 

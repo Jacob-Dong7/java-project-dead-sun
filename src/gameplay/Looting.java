@@ -38,23 +38,23 @@ public class Looting {
         System.out.println(enemy);
         System.out.println("==================================================");
         if (findLoot() == true) {
-                System.out.println("You check the area and gather anything useful. You found:");
+                System.out.println("You search the area and the bodies, collecting anything of value.");
                 if (this.ammo > 0) {
-                    System.out.println("Ammunition: " + ammo) ;
+                    System.out.println("Ammunition recovered: " + ammo) ;
                     gc.inventory.findAmmo(ammo);
                 }
                 if (this.money > 0) {
-                    System.out.println("Money: $" + money);
+                    System.out.println("Money recovered: $" + money);
                     gc.inventory.findMoney(money);
                 }
 
                 if (this.heal > 0) {
-                    System.out.println("Medicine: " + heal);
-                    System.out.println("The Medicine includes:");
+                    System.out.println("Medical supplies recovered: " + heal);
+                    System.out.println("Contents:");
                     generateMeds(getMedPouch);
                 }
         } else {
-            System.out.println("You search but found nothing");
+            System.out.println("You search the area but find nothing worth taking.");
         }
         System.out.println("==================================================");
     clear();

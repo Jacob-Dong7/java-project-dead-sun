@@ -27,10 +27,16 @@ public class Inventory {
     public void switchWeapon(Player player) {
         int input;
         System.out.println("==================================================");
-        System.out.println("Weapons:");
+        System.out.println("Your Weappons:");
         for (int i = 0; i < weaponSling.size(); ++i) {
+            System.out.print("[");
             System.out.print(i + 1);
-            System.out.println(" (" + weaponSling.get(i).getName() + " Damage: " + weaponSling.get(i).getDamage() + ")");
+            System.out.print("]");
+            if (player.getWeapon() == weaponSling.get(i)) {
+                System.out.println(" " + weaponSling.get(i).getName() + " (DMG " + weaponSling.get(i).getDamage() + ")    [EQUIPPED]");
+            } else {
+                System.out.println(" " + weaponSling.get(i).getName() + " (DMG " + weaponSling.get(i).getDamage() + ")");
+            }
         }
 
         System.out.println("==================================================");
@@ -52,9 +58,13 @@ public class Inventory {
             return;
         }
 
+        System.out.println("==================================================");
+        System.out.println("Medicine Pouch:");
+        System.out.println("==================================================");
         for (int i = 0; i < medPouch.size(); ++i) {
             System.out.println(i + 1 + " " + medPouch.get(i).getHeal().getName() + " Amount: " + medPouch.get(i).getAmount());
         }
+        System.out.println("==================================================");
 
         input = scnr.nextInt() - 1;
 
@@ -106,12 +116,6 @@ public class Inventory {
 
     public ArrayList<HealingItem> getMedPouch() {
         return medPouch;
-    }
-
-    public void viewMedPouch() {
-            System.out.println("==================================================");
-            System.out.println("1 (Heal) -1 (Return)");
-            System.out.println("==================================================");
     }
 }
 

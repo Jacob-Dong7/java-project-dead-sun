@@ -17,7 +17,7 @@ public class Raiders extends Character{
     public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
         prompt(weapon, "damage");
-        System.out.println("\nYou dealt " + damageTaken + " damage.");
+        System.out.println("\nYou dealt " + damageTaken + " DMG.");
         System.out.println("Black Torch Raider HP: " + String.valueOf(health) + " / 50");
         System.out.println("==================================================");
     }
@@ -48,7 +48,7 @@ public class Raiders extends Character{
             switch (randomChance) {
                 case 1:
                     System.out.println("You fire your pistol. The shot echoes through the tunnel.");
-                    System.out.println("The raider stiffens — then drops.");
+                    System.out.println("The raider stiffens - then drops.");
                     break;
                 case 2:
                     System.out.println("A clean trigger pull.");
@@ -77,12 +77,15 @@ public class Raiders extends Character{
                     break;
             }           
         }
-        System.out.println("==================================================");
+
     }
 
     public void prompt(Weapon weapon, String type) {
         int randomChance = random.nextInt(1, 4);
         System.out.println("==================================================");
+        System.out.println("YOUR TURN");
+        System.out.println("==================================================");
+
         if (weapon == Weapon.CLEAVER || weapon == Weapon.KNIFE)  {
             switch (randomChance) {
                 case 1:
@@ -148,13 +151,13 @@ public class Raiders extends Character{
         if (hit <= 40) {
             switch (variety) {
                 case 1:
-                    System.out.println("The Black Torch swings his burning torch in a wide arc, embers scattering across the floor.");
+                    System.out.print("The Black Torch swings his burning torch in a wide arc, embers scattering across the floor. ");
                     break;
                 case 2:
-                    System.out.println("Flames roar as the raider thrusts the torch forward, heat searing the air around you.");
+                    System.out.print("Flames roar as the raider thrusts the torch forward, heat searing the air around you. ");
                     break;
                 case 3:
-                    System.out.println("The torch crashes down toward your head, sparks bursting on impact.");
+                    System.out.print("The torch crashes down toward your head, sparks bursting on impact. ");
                     break;
             }
             return true;

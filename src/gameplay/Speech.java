@@ -8,12 +8,12 @@ public class Speech {
     private static final Scanner scnr = new Scanner(System.in);
     Random random = new Random();
 
-    public boolean attemptSpeech(Stats playerStat, int map, int enemyCount) {
+    public boolean attemptSpeech(Stats playerStat, String enemyType, int enemyCount) {
         //speech for first section, metro station
         while (true) {
 
             //map dependent
-            if (map == 1) {
+            if (enemyType == "raider") {
                 if (enemyCount == 1) {
                     System.out.println("==================================================");
                     System.out.println(
@@ -26,7 +26,11 @@ public class Speech {
                     );
                 }
                     System.out.println("You step forward");
-                    System.out.println("1 (Intimidate) 2 (Persuade) 3 (Fight)");
+                    System.out.println("==================================================");
+                    System.out.println("Speech Options:");
+                    System.out.println("1. Intimidate");
+                    System.out.println("2. Persuade");
+                    System.out.println("3. Fight");
                     System.out.println("==================================================");
                     choice = scnr.nextInt();
             } else {
@@ -36,10 +40,8 @@ public class Speech {
 
             //user choices
             if (choice == 1) {
-                System.out.println("==================================================");
                 System.out.println("You push forward, unflinching.");
                 if (intimidate(playerStat) == true) {
-                    System.out.println("==================================================");
                     if (enemyCount == 1) {
                         System.out.println(
                             "The raider freezes." + "\n" +
@@ -60,7 +62,6 @@ public class Speech {
                     System.out.println("==================================================");
                     return true;
                 } else {
-                    System.out.println("==================================================");
                     if (enemyCount == 1) {
                         System.out.println(
                             "The raider grins." + "\n" +
@@ -78,9 +79,7 @@ public class Speech {
                     return false;
                 }
             } else if (choice == 2) { //user persuade
-                System.out.println("==================================================");
                 System.out.println("You try to talk your way through.");
-                System.out.println("==================================================");
                 if (persuade(playerStat) == true) {
                     if (enemyCount == 1) {
                         System.out.println(
@@ -102,7 +101,6 @@ public class Speech {
                     System.out.println("==================================================");
                     return true;
                 } else {
-                    System.out.println("==================================================");
                     if (enemyCount == 1) {
                         System.out.println(
                             "The raider tilts his head." + "\n" +
@@ -120,9 +118,7 @@ public class Speech {
                     return false;
                 }                
             } else if (choice == 3) {
-                System.out.println("==================================================");
                 System.out.println("You ready your weapon.");
-                System.out.println("==================================================");
                 if (enemyCount == 1) {
                         System.out.println(
                             "You shift your weight." + "\n" +

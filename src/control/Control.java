@@ -9,8 +9,12 @@ public class Control {
     public void bossPresent(GameContext gc, Dungeon map) {
         this.maxEnemyCount = 1;
         while (true) {
-            System.out.println("==================================================");
-            System.out.println("1 (Attack) 2 (Inventory) 3 (Switch Weapon) 4 (Check Status)");
+            System.out.println("Action:");
+            System.out.println("1. Attack");;
+            System.out.println("\nManagement:");
+            System.out.println("2. Inventory");
+            System.out.println("3. Switch Weapon") ;
+            System.out.println("4. Check Status");
             System.out.println("==================================================");
             userInput = scnr.nextInt();
             if (userInput == 1) {
@@ -19,13 +23,15 @@ public class Control {
             } else if (userInput == 2) { 
                 int open;
                 System.out.println("==================================================");
-                System.out.println("1 (Medicine Pouch) 2 (Wallet) 3 (Ammo Pouch) -1 (Return)");
+                System.out.println("Inventory:");
+                System.out.println("1. Medicine Pouch");
+                System.out.println("2. Wallet");
+                System.out.println("3. Ammo Pouch");
+                System.out.println("");
+                System.out.println("-1. Return");
                 System.out.println("==================================================");
                 open = scnr.nextInt();
                 if (open == 1) {
-                    gc.inventory.viewMedPouch();
-                    open = scnr.nextInt();
-                if (open == -1) continue;
                     gc.inventory.heal(gc.player);
                 } else if (open == 2) {
                     System.out.println("==================================================");
@@ -45,7 +51,7 @@ public class Control {
             } else if (userInput == -1) { //exit
                 System.exit(0);
             } else {
-                System.out.println("Please select your next move");
+                System.out.println("Choose your next action");
                 continue;
             }
         
@@ -54,45 +60,55 @@ public class Control {
     
     public void enemyPresent(GameContext gc, Dungeon map) {
         this.maxEnemyCount = map.enemyCount();
-        System.out.println("max enemy " + maxEnemyCount);
         while (true) {
-            System.out.println("==================================================");
-            System.out.println("1 (Sneak Pass) 2 (Attack) 3 (Talk) 4 (Inventory) 5 (Switch Weapon) 6 (Check Status)");
+            System.out.println("Actions:");
+            System.out.println("1. Attack");
+            System.out.println("2. Sneak Pass");
+            System.out.println("3. Talk");
+            System.out.println("\nManagement:");
+            System.out.println("4. Inventory");
+            System.out.println("5. Switch Weapon") ;
+            System.out.println("6. Check Status");
             System.out.println("==================================================");
             userInput = scnr.nextInt();
-            if (userInput == 1) {
+            if (userInput == 2) {
                 if (gc.stealth.sneakAttempt(gc.stats) == true) {
                     System.out.println("==================================================");
-                    System.out.println("You successfully sneaked pass");
+                    System.out.println("You slip past undetected.");
                     System.out.println("==================================================");
                     break;
                 } else {
                     System.out.println("==================================================");
-                    System.out.println("You attempted to sneak pass, but was caught");
+                    System.out.println("You attempted to sneak past, but were caught.");
                     System.out.println("==================================================");
                     gc.combat.runEncounter(gc, map);
                     break;
             }
-        } else if (userInput == 2) {
+        } else if (userInput == 1) {
             gc.combat.runEncounter(gc, map);
             break;
         } else if (userInput == 3) {
-            if (gc.speech.attemptSpeech(gc.stats, 1, map.enemyCount()) == false) {
+            if (gc.speech.attemptSpeech(gc.stats, map.getEnemyType(), map.enemyCount()) == false) {
                 gc.combat.runEncounter(gc, map);  
+                break;
+            } else {
+                map.removeEnemy(map.enemyCount());
+               this. maxEnemyCount = -1;
+                break;
             }
-            map.removeEnemy(map.enemyCount());
-            break;
             //view inventory
         } else if (userInput == 4) { 
             int open;
             System.out.println("==================================================");
-            System.out.println("1 (Medicine Pouch) 2 (Wallet) 3 (Ammo Pouch) -1 (Return)");
+            System.out.println("Inventory:");
+            System.out.println("1. Medicine Pouch");
+            System.out.println("2. Wallet");
+            System.out.println("3. Ammo Pouch");
+            System.out.println("");
+            System.out.println("-1. Return");
             System.out.println("==================================================");
             open = scnr.nextInt();
             if (open == 1) {
-                gc.inventory.viewMedPouch();
-                open = scnr.nextInt();
-            if (open == -1) continue;
                 gc.inventory.heal(gc.player);
             } else if (open == 2) {
                 System.out.println("==================================================");
@@ -112,7 +128,7 @@ public class Control {
         } else if (userInput == -1) { //exit
             System.exit(0);
         } else {
-            System.out.println("Please select your next move");
+            System.out.println("Choose your next action");
             continue;
         }
         
@@ -121,32 +137,40 @@ public class Control {
 
     public void noEnemy(GameContext gc, Dungeon map) {
         while (true) {
-            System.out.println("==================================================");
-            System.out.println("1 (Move forward) 2 (Loot) 3 (Inventory) 4 (Switch Weapon) 5 (Check Status)");
+            System.out.println("Actions:");
+            System.out.println("1. Move forward");
+            System.out.println("2. Loot");
+            System.out.println("\nManagement:");
+            System.out.println("3. Inventory");
+            System.out.println("4. Switch Weapon") ;
+            System.out.println("5. Check Status");
             System.out.println("==================================================");
             userInput = scnr.nextInt();
 
             if (userInput == 1) {
                 break;
             } else if (userInput == 2) {
-                if (map.isLooted() == false) {
+                if (maxEnemyCount == -1) {
+                    System.out.println("I should get going...");
+                } else if (map.isLooted() == false) {
                     gc.looting.loot(gc.inventory.getMedPouch(), gc, maxEnemyCount);
+                    map.loot();
                 } else {
                     System.out.println("You have already looted everything you can");
                 }
-
-                map.loot();
                 continue;
             } else if (userInput == 3) {
                 int open;
                 System.out.println("==================================================");
-                System.out.println("1 (Medicine Pouch) 2 (Wallet) 3 (Ammo Pouch) -1 (Return)");
+                System.out.println("Inventory:");
+                System.out.println("1. Medicine Pouch");
+                System.out.println("2. Wallet");
+                System.out.println("3. Ammo Pouch");
+                System.out.println("");
+                System.out.println("-1. Return");
                 System.out.println("==================================================");
                 open = scnr.nextInt();
                 if (open == 1) {
-                    gc.inventory.viewMedPouch();
-                    open = scnr.nextInt();
-                    if (open == -1) continue;
                     gc.inventory.heal(gc.player);
                 } else if (open == 2) {
                     System.out.println("==================================================");

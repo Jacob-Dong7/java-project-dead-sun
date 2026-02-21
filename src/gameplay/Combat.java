@@ -53,20 +53,35 @@ public class Combat {
 
     public void fightEnemy(GameContext gc, ArrayList<Character> enemies, Dungeon map) {
         int input;
+        int enemyCount = 1;
         while (!enemies.isEmpty()) {
+            enemies.removeIf(e -> e.getHealth() <= 0);
             System.out.println("==================================================");
-            System.out.println("1 (Attack) 2 (Heal) 3 (Switch Weapons) 4 (Check Status)");
+            System.out.println("COMBAT STATUS");
+            System.out.println("==================================================");
+            System.out.println("Hostile Count: " + map.enemyCount() + "\n");
+            System.out.println("Target HP: " + enemies.get(0).getHealth());
+            System.out.println("\nYour Health: " + gc.player.getHealth());
+
+            System.out.println("--------------------------------------------------");
+            System.out.println("ACTIONS");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Combat:");
+            System.out.println("1. Attack");
+            System.out.println("\nManagement:");
+            System.out.println("2. Heal");
+            System.out.println("3. Switch Weapon");
+            System.out.println("4. Check Status");
             System.out.println("==================================================");
             input = scnr.nextInt();
+
             if (verifyControl(input) == false ) {
-                System.out.println("Choose your next move");
+                System.out.println("Choose your next action");
                 continue;
             }
                     
             if (input == 1) { //player attack
-                if (enemyHealth(enemies, map, gc) == false) {
-                    continue;
-                }
+                if (enemies.get(0).getHealth() <= 0) continue;
                 //checks if player uses guns
                 if (gc.player.getWeapon().isRanged() == true) {
                      if (gc.inventory.getAmmo() <= 0) {
@@ -80,6 +95,7 @@ public class Combat {
             if (enemyHealth(enemies, map, gc) == false) {
                 continue;
             }
+
             attack(gc.player, enemies.get(0), gc.player.getWeapon(), gc);
             
             } else if (input == 2) { //user heal
@@ -92,7 +108,7 @@ public class Combat {
                 gc.player.getStatus(gc);
                 continue;
             } else {
-                System.out.println("Please select your next move");
+                System.out.println("Choose your next action");
                 continue;
             }
 
@@ -103,22 +119,35 @@ public class Combat {
             //enemy attack backs depending on how many there are
             if (enemies.isEmpty()) break;
 
+            System.out.println("==================================================");
+            System.out.println("ENEMY TURN");
+            System.out.println("==================================================");
             for (Character enemy : enemies) {
+                System.out.print("[" + enemyCount + "] ");
                 attack(enemy, gc.player, enemy.getWeapon(), gc);
+                ++enemyCount;
             }
-
-            System.out.println("==================================================");
-            System.out.println("Enemy Health: " + enemies.get(0).getHealth());
-            System.out.println("Your Health: " + gc.player.getHealth());
-            System.out.println("==================================================");
+            System.out.println("Your HP: " + gc.player.getHealth() + " / 100");
+            enemyCount = 0;
+        }
+        if (gc.player.getHealth() <= 0) {
+            gc.player.killed();
         }
     }
 
     public void fightBoss(GameContext gc, Character boss, Dungeon map) {
         int input;
         while (true) {
+
             System.out.println("==================================================");
-            System.out.println("1 (Attack) 2 (Heal) 3 (Switch Weapons) 4 (Check Status)");
+            System.out.println(boss.getName() + "'s' HP: " + boss.getHealth());
+            System.out.println("Your Health: " + gc.player.getHealth());
+            System.out.println("Combat:");
+            System.out.println("1. Attack");;
+            System.out.println("\nManagement:");
+            System.out.println("2. Heal");
+            System.out.println("3. Switch Weapon");
+            System.out.println("4. Check Status");
             System.out.println("==================================================");
             input = scnr.nextInt();
             if (verifyControl(input) == false ) {
@@ -160,7 +189,7 @@ public class Combat {
                 gc.player.getStatus(gc);
                 continue;
             } else {
-                System.out.println("Please select your next move");
+                System.out.println("Choose your next move");
                 continue;
             }
 
@@ -172,11 +201,9 @@ public class Combat {
 
             attack(boss, gc.player, boss.getWeapon(), gc);
 
-
-            System.out.println("==================================================");
-            System.out.println("Enemy Health: " + boss.getHealth());
-            System.out.println("Your Health: " + gc.player.getHealth());
-            System.out.println("==================================================");
+            if (gc.player.getHealth() <= 0) {
+                gc.player.killed();
+            }
         }
     }
 
@@ -197,8 +224,11 @@ public class Combat {
             map.removeEnemy(1);
             if (enemies.get(0) instanceof Raiders) {
                 ((Raiders) enemies.get(0)).killed(gc.player.getWeapon());
+
             }
             enemies.remove(0);
+            System.out.println("(Enemy Killed)");
+            System.out.println("==================================================");
             return false;
         } else {
             return true;

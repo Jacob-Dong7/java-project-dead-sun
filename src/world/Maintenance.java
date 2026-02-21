@@ -16,8 +16,8 @@ public class Maintenance extends Map {
         map = new ArrayList<>();
 
         //populate the dungeon
-        map.add(new Dungeon("Valve Gallery", randEnemy = generateEnemy(), "raider", generateItem(), generateItem(), generateItem(), generateItem(), false, descOne(randEnemy)));
-        map.add(new Dungeon("Pump Junction", 0, "raider", generateItem(), generateItem(), generateItem(), generateItem(), true, descTwo(), "raider boss"));
+        map.add(new Dungeon("Valve Gallery", randEnemy = generateEnemy(), "raider", false, descOne(randEnemy)));
+        map.add(new Dungeon("Pump Junction", 0, "raider", true, descTwo(), "raider boss"));
     }
 
     //description for each dungeon. Layout is exactly same for pretty much all rooms.
@@ -85,7 +85,6 @@ public class Maintenance extends Map {
 
 
     public void play(GameContext gc) {
-        System.out.println("size = " + map.size());
         for (int i = 0; i < map.size(); ++i) {
             printDescription(i);
             while (true) {
@@ -104,6 +103,7 @@ public class Maintenance extends Map {
         }
         
         System.out.println("You emerge from the maintenance tunnel onto the surface.");
+        System.out.println("(You have advanced to the next level)");
     }
 
 

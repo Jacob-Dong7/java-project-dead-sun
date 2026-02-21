@@ -56,6 +56,8 @@ public class RaiderBoss extends Character {
     public void prompt(Weapon weapon, String type) {
         int randomChance = random.nextInt(1, 4);
         System.out.println("==================================================");
+        System.out.println("YOUR TURN");
+        System.out.println("==================================================");
         if (weapon == Weapon.CLEAVER || weapon == Weapon.KNIFE)  {
             switch (randomChance) {
                 case 1:

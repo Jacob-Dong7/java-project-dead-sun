@@ -23,21 +23,26 @@ public class Control {
             } else if (userInput == 2) { 
                 int open;
                 System.out.println("==================================================");
-                System.out.println("Inventory:");
-                System.out.println("1. Medicine Pouch");
-                System.out.println("2. Wallet");
-                System.out.println("3. Ammo Pouch");
-                System.out.println("");
-                System.out.println("-1. Return");
+                System.out.println("INVENTORY");
+                System.out.println("==================================================");
+                System.out.println("[1] Medicine Pouch");
+                System.out.println("[2] Wallet");
+                System.out.println("[3] Ammo Pouch");
+                System.out.println("--------------------------------------------------");
+                System.out.println("[0] Return");
                 System.out.println("==================================================");
                 open = scnr.nextInt();
                 if (open == 1) {
                     gc.inventory.heal(gc.player);
                 } else if (open == 2) {
                     System.out.println("==================================================");
+                    System.out.println("WALLET");
+                    System.out.println("==================================================");
                     System.out.println("$" + String.valueOf(gc.inventory.getMoney()));
                     System.out.println("==================================================");
                 } else if (open == 3) {
+                    System.out.println("==================================================");
+                    System.out.println("AMMO POUCH");
                     System.out.println("==================================================");
                     System.out.println("Amount: " + String.valueOf(gc.inventory.getAmmo()));
                     System.out.println("==================================================");
@@ -91,32 +96,39 @@ public class Control {
             break;
         } else if (userInput == 3) {
             if (gc.speech.attemptSpeech(gc.stats, map.getEnemyType(), map.enemyCount()) == false) {
+                System.out.println("SPEECH CHECK FAILED");
                 gc.combat.runEncounter(gc, map);  
                 break;
             } else {
+                System.out.println("SPEECH CHECK SUCCESSFUL");
                 map.removeEnemy(map.enemyCount());
-               this. maxEnemyCount = -1;
+                this. maxEnemyCount = -1;
                 break;
             }
             //view inventory
         } else if (userInput == 4) { 
             int open;
             System.out.println("==================================================");
-            System.out.println("Inventory:");
-            System.out.println("1. Medicine Pouch");
-            System.out.println("2. Wallet");
-            System.out.println("3. Ammo Pouch");
-            System.out.println("");
-            System.out.println("-1. Return");
+            System.out.println("INVENTORY");
+            System.out.println("==================================================");
+            System.out.println("[1] Medicine Pouch");
+            System.out.println("[2] Wallet");
+            System.out.println("[3] Ammo Pouch");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[0] Return");
             System.out.println("==================================================");
             open = scnr.nextInt();
             if (open == 1) {
                 gc.inventory.heal(gc.player);
             } else if (open == 2) {
                 System.out.println("==================================================");
+                System.out.println("WALLET");
+                System.out.println("==================================================");
                 System.out.println("$" + String.valueOf(gc.inventory.getMoney()));
                 System.out.println("==================================================");
             } else if (open == 3) {
+                System.out.println("==================================================");
+                System.out.println("AMMO POUCH");
                 System.out.println("==================================================");
                 System.out.println("Amount: " + String.valueOf(gc.inventory.getAmmo()));
                 System.out.println("==================================================");

@@ -37,20 +37,22 @@ public class Looting {
         generate(enemy);
         System.out.println(enemy);
         System.out.println("==================================================");
+        System.out.println("LOOTING");
+        System.out.println("==================================================");
         if (findLoot() == true) {
-                System.out.println("You search the area and the bodies, collecting anything of value.");
+                System.out.println("You search the area and the bodies, taking anything useful.");
+                System.out.println("Gained:");
                 if (this.ammo > 0) {
-                    System.out.println("Ammunition recovered: " + ammo) ;
+                    System.out.println("+ Ammo: " + ammo) ;
                     gc.inventory.findAmmo(ammo);
                 }
                 if (this.money > 0) {
-                    System.out.println("Money recovered: $" + money);
+                    System.out.println("+ Money: $" + money);
                     gc.inventory.findMoney(money);
                 }
 
                 if (this.heal > 0) {
-                    System.out.println("Medical supplies recovered: " + heal);
-                    System.out.println("Contents:");
+                    System.out.println("\nMedical Pouch updated:");
                     generateMeds(getMedPouch);
                 }
         } else {
@@ -70,7 +72,7 @@ public class Looting {
                     for (HealingItem med : medPouch) {
                         if (med.getHeal() == Healing.BANDAGE) {
                             med.findItem();
-                            System.out.println("You find a Bandage");
+                            System.out.println("+ Bandage x1");
                             found = true;
                             break;
                         }
@@ -86,14 +88,13 @@ public class Looting {
                     for (HealingItem med : medPouch) {
                         if (med.getHeal() == Healing.MEDKIT) {
                             med.findItem();
-                            System.out.println("You find a Medkit");
+                            System.out.println("+ Medkit x1");
                             found = true;
                             break;
                         }
                     } 
                     if (found == false) {
-                        System.out.println("You find a Medkit");
-                        System.out.println("(New item added to Medical Pouch)");
+                        System.out.println("+ Medkit x1 (New item added to Medical Pouch)");
                         medPouch.add(new HealingItem(Healing.MEDKIT, 1));
                     }
 
@@ -103,14 +104,13 @@ public class Looting {
                     for (HealingItem med : medPouch) {
                         if (med.getHeal() == Healing.SYRINGE) {
                             med.findItem();
-                            System.out.println("You find a Syringe");
+                            System.out.println("+ Syringe x1");
                             found = true;
                             break;
                         }
                     }    
                     if (found == false) {
-                        System.out.println("You find a Syringe");
-                        System.out.println("(New item added to Medical Pouch)");
+                        System.out.println("+ Syringe x1 (New item added to Medical Pouch)");
                         medPouch.add(new HealingItem(Healing.SYRINGE, 1));
                     }
                     break;          

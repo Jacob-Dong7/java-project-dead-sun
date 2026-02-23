@@ -134,8 +134,11 @@ public class Metro extends Map {
                 }
             }
         }
+        System.out.println("==================================================");
+        System.out.println("LOCATION: Maintenance Tunnels");
+        System.out.println("==================================================");
         System.out.println("You descend the stairwell.\nValves hiss somewhere below.");
-        System.out.println("(You have advanced to the next level)");
+        System.out.println(">> LEVEL ADVANCED");
     }
 }
 

@@ -40,6 +40,9 @@ public class Speech {
 
             //user choices
             if (choice == 1) {
+                System.out.println("==================================================");
+                System.out.println("INTIMIDATION");
+                System.out.println("==================================================");
                 System.out.println("You push forward, unflinching.");
                 if (intimidate(playerStat) == true) {
                     if (enemyCount == 1) {
@@ -79,6 +82,9 @@ public class Speech {
                     return false;
                 }
             } else if (choice == 2) { //user persuade
+                System.out.println("==================================================");
+                System.out.println("PERSUATION");
+                System.out.println("==================================================");
                 System.out.println("You try to talk your way through.");
                 if (persuade(playerStat) == true) {
                     if (enemyCount == 1) {
@@ -118,6 +124,9 @@ public class Speech {
                     return false;
                 }                
             } else if (choice == 3) {
+                System.out.println("==================================================");
+                System.out.println("COMBAT");
+                System.out.println("==================================================");
                 System.out.println("You ready your weapon.");
                 if (enemyCount == 1) {
                         System.out.println(

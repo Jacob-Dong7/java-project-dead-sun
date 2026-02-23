@@ -24,7 +24,6 @@ public class Maintenance extends Map {
     public String[] descOne(int enemy) {
         if (enemy == 1) {
             String[] description = {
-                "==================================================",
                 "You descend into the tunnels.",
                 "",
                 "Valves line the wall like ribs. Pipes tick as they cool.",
@@ -33,20 +32,17 @@ public class Maintenance extends Map {
                 "One Black Torch raider squats by a toolbox, prying it open.",
                 "",
                 "He hasn't seen you yet.",
-                "=================================================="
             };
             return description;
         } else {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
-                "==================================================",
                 "You descend into the tunnels.",
                 "",
                 "Valves line the wall like ribs. Pipes tick as they cool.",
                 "",
                 enemyCount + " Black Torch raiders work the corridor, torches low.",
                 "They control the only path forward.",
-                "=================================================="
             };
             return description;
         }
@@ -86,6 +82,8 @@ public class Maintenance extends Map {
 
     public void play(GameContext gc) {
         for (int i = 0; i < map.size(); ++i) {
+            System.out.println("==================================================");
+            System.out.println("LOCATION: " + map.get(i).getName());
             printDescription(i);
             while (true) {
                 //if boss is present
@@ -103,7 +101,7 @@ public class Maintenance extends Map {
         }
         
         System.out.println("You emerge from the maintenance tunnel onto the surface.");
-        System.out.println("(You have advanced to the next level)");
+        System.out.println(">> LEVEL ADVANCED");
     }
 
 

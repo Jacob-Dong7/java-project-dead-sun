@@ -27,7 +27,9 @@ public class Inventory {
     public void switchWeapon(Player player) {
         int input;
         System.out.println("==================================================");
-        System.out.println("Your Weappons:");
+        System.out.println("WEAPON SLING");
+        System.out.println("==================================================");
+        System.out.println("Your Weapons:");
         for (int i = 0; i < weaponSling.size(); ++i) {
             System.out.print("[");
             System.out.print(i + 1);
@@ -51,6 +53,7 @@ public class Inventory {
 
     public void heal(Player player) {
         int input;
+        int num = 0;
         System.out.println("--------------------------------------------------");
         if (player.getHealth() == 100) {
             System.out.println("You check your wounds, but there's nothing to treat.");
@@ -59,11 +62,14 @@ public class Inventory {
         }
 
         System.out.println("==================================================");
-        System.out.println("Medicine Pouch:");
+        System.out.println("MEDICAL POUCH");
         System.out.println("==================================================");
         for (int i = 0; i < medPouch.size(); ++i) {
-            System.out.println(i + 1 + ". " + medPouch.get(i).getHeal().getName() + " Amount: " + medPouch.get(i).getAmount());
+            num = i + 1;
+            System.out.println("[" + num + "] " + medPouch.get(i).getHeal().getName() + ": " + medPouch.get(i).getAmount() + "  -" + medPouch.get(i).getHeal().getDescription());
         }
+        System.out.println("--------------------------------------------------");
+        System.out.println("0. Return");
         System.out.println("==================================================");
 
         input = scnr.nextInt() - 1;
@@ -86,8 +92,7 @@ public class Inventory {
         player.healBy(healingFactor);
         player.healPrompt(medPouch.get(input).getHeal());
         medPouch.get(input).useItem();
-        
-        System.out.println("==================================================");
+
         
     }
 

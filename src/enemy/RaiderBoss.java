@@ -16,13 +16,15 @@ public class RaiderBoss extends Character {
     public void takeDamage(int damageTaken, Weapon weapon) {
         health -= damageTaken;
         prompt(weapon, "damage");
-        System.out.println("\nYou dealt " + damageTaken + " damage.");
+        System.out.println("\nYou dealt " + damageTaken + " DMG.");
         System.out.println("The Butcher's HP: " + String.valueOf(health) + " / 150");
         System.out.println("==================================================");
     }
 
     @Override
     public void killed(Weapon weapon) {
+        System.out.println("==================================================");
+        System.out.println("YOUR TURN");
         System.out.println("==================================================");
         if (weapon == Weapon.CLEAVER || weapon == Weapon.KNIFE)  {
             System.out.println("Your blade finds the gap in his armor.");
@@ -120,15 +122,15 @@ public class RaiderBoss extends Character {
             switch (variety) {
                 case 1:
                     System.out.println("The Butcher steps forward and swings his knife");
-                    System.out.println("The blade cuts throuugh your flesh");
+                    System.out.print("The blade cuts through your flesh. ");
                     break;
                 case 2:
                     System.out.println("The Butcher lunges at you");
-                    System.out.println("His knife drives into your flesh");
+                    System.out.print("His knife drives into your flesh. ");
                     break;
                 case 3:
                     System.out.println("The Butcher raises his blade high above his head.");
-                    System.out.println("He brings it down in a crushing strike.");
+                    System.out.print("He brings it down in a crushing strike. ");
                     break;
             }
             return true;

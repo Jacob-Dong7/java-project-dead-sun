@@ -61,7 +61,7 @@ public class Combat {
             System.out.println("==================================================");
             System.out.println("Hostile Count: " + map.enemyCount() + "\n");
             System.out.println("Target HP: " + enemies.get(0).getHealth());
-            System.out.println("\nYour Health: " + gc.player.getHealth());
+            System.out.println("\nYour HP: " + gc.player.getHealth());
 
             System.out.println("--------------------------------------------------");
             System.out.println("ACTIONS");
@@ -126,13 +126,13 @@ public class Combat {
             if (enemies.isEmpty()) break;
 
             System.out.println("ENEMY TURN");
-            System.out.println("==================================================\n");
+            System.out.println("==================================================");
             for (Character enemy : enemies) {
                 System.out.print("[" + enemyCount + "] ");
                 attack(enemy, gc.player, enemy.getWeapon(), gc);
                 ++enemyCount;
             }
-            System.out.println("Your HP: " + gc.player.getHealth() + " / 100\n");
+            System.out.println("Your HP: " + gc.player.getHealth() + " / 100");
             enemyCount = 1;
 
             if (gc.player.getHealth() <= 0) {
@@ -147,10 +147,16 @@ public class Combat {
         while (true) {
 
             System.out.println("==================================================");
-            System.out.println(boss.getName() + "'s' HP: " + boss.getHealth());
-            System.out.println("Your Health: " + gc.player.getHealth());
+            System.out.println("COMBAT STATUS");
+            System.out.println("==================================================");
+            System.out.println("The Butcher's HP: " + boss.getHealth());
+            System.out.println("\nYour HP: " + gc.player.getHealth());
+
+            System.out.println("--------------------------------------------------");
+            System.out.println("ACTIONS");
+            System.out.println("--------------------------------------------------");
             System.out.println("Combat:");
-            System.out.println("1. Attack");;
+            System.out.println("1. Attack");
             System.out.println("\nManagement:");
             System.out.println("2. Heal");
             System.out.println("3. Switch Weapon");
@@ -185,7 +191,7 @@ public class Combat {
             if (boss.getHealth() <= 0) {
                 boss.killed(gc.player.getWeapon());
                 map.removeBoss();
-                 return;
+                return;
             }
 
             attack(gc.player, boss, gc.player.getWeapon(), gc);
@@ -240,8 +246,8 @@ public class Combat {
 
             }
             enemies.remove(0);
-            System.out.println("(Enemy Killed)");
-            System.out.println("\n==================================================");
+            System.out.println(">> ENEMY KILLED");
+            System.out.println("==================================================");
             return false;
         } else {
             return true;

@@ -26,6 +26,8 @@ public class Raiders extends Character{
     public void killed(Weapon weapon) {
         int randomChance = random.nextInt(1, 4);
         System.out.println("==================================================");
+        System.out.println("YOUR TURN");
+        System.out.println("==================================================");
         if (weapon == Weapon.CLEAVER || weapon == Weapon.KNIFE)  {
             switch (randomChance) {
                 case 1:
@@ -84,7 +86,7 @@ public class Raiders extends Character{
         int randomChance = random.nextInt(1, 4);
         System.out.println("==================================================");
         System.out.println("YOUR TURN");
-        System.out.println("==================================================\n");
+        System.out.println("==================================================");
 
         if (weapon == Weapon.CLEAVER || weapon == Weapon.KNIFE)  {
             switch (randomChance) {

@@ -51,7 +51,7 @@ public class Player extends Character {
         System.out.println("Please enter your name: ");
 
         //default health weapon and its damage 
-        health = 100;
+        health = 100000;
         currWeapon = Weapon.KNIFE;
         damage = 20;
 
@@ -235,6 +235,8 @@ public class Player extends Character {
 
     public void healPrompt(Healing usedItem) {
         System.out.println("==================================================");
+        System.out.println("HEALING");
+        System.out.println("==================================================");
         if (usedItem == Healing.BANDAGE) {
             System.out.println("You tear open a worn bandage packet with shaking fingers.");
             System.out.println("Cloth wraps tight around the wound, soaking slowly as you pull it firm.");
@@ -250,7 +252,6 @@ public class Player extends Character {
         }
         System.out.println("You recovered " + usedItem.getHeal() + " HP");
         System.out.println("Your HP: " + health + " / 100");
-        System.out.println("==================================================");
     }
 
     @Override
@@ -261,14 +262,14 @@ public class Player extends Character {
     @Override
     public boolean tryAttack() {
         int hit = random.nextInt(1, 101); // 1 - 100% 
-        if (hit <= 80) { // 80 hit chance
+        if (hit <= 90) { 
             return true;
         } else {
             System.out.println("==================================================");
             System.out.println("YOUR TURN");
-            System.out.println("==================================================\n");
+            System.out.println("==================================================");
             System.out.println("Your attack misses.");
-            System.out.println("\n==================================================");
+            System.out.println("==================================================");
             return false;
         }       
     }

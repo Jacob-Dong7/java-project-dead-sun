@@ -48,8 +48,7 @@ public abstract class Character {
     public void switchWeapon(Weapon newWeapon) {
         this.currWeapon = newWeapon;
         System.out.println("==================================================");
-        System.out.println("Equipped Weapon: " + currWeapon.getName());
-        System.out.println("==================================================");
+        System.out.println(">>" + currWeapon.getName() + " Equipped.");
     }
 
     public void takeDamage(int damageTaken, Weapon weapon) {

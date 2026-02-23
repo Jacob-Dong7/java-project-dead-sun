@@ -37,7 +37,7 @@ public class Stats {
             "Strength:   " + strength + "\n" +
             "Charisma:   " + charisma + "\n" + 
             "Stealth:    " + stealth +
-            "\n--------------------------------------------------\n\n"
+            "\n--------------------------------------------------\n"
         );
 
         System.out.println("1.  Strength");
@@ -46,7 +46,7 @@ public class Stats {
         System.out.println("4.  Reset Points");
 
 
-        System.out.println("\n\n==================================================");
+        System.out.println("\n==================================================");
 
         if (scnr.hasNextInt()) {
             input = scnr.nextInt();

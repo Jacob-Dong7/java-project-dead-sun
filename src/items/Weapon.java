@@ -1,10 +1,10 @@
 package items;
 public enum Weapon {
-    KNIFE(20, "Shiv", false),
-    CLEAVER(25, "Cleaver", false),
-    PISTOL(30, "Homemade Pistol", true),
-    RIFLE(35, "Homemade Assualt Rifle", true),
-    ADVANCERIFLE(50, "Old World Rifle", true);
+    KNIFE(25, "Shiv", false),
+    CLEAVER(30, "Cleaver", false),
+    PISTOL(35, "Homemade Pistol", true),
+    RIFLE(45, "Homemade Assualt Rifle", true),
+    ADVANCERIFLE(60, "Old World Rifle", true);
 
 
     final int damage;

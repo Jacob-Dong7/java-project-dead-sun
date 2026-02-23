@@ -51,7 +51,9 @@ public class Control {
             } else if (userInput == -1) { //exit
                 System.exit(0);
             } else {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Choose your next action");
+                System.out.println("--------------------------------------------------");
                 continue;
             }
         
@@ -73,14 +75,14 @@ public class Control {
             userInput = scnr.nextInt();
             if (userInput == 2) {
                 if (gc.stealth.sneakAttempt(gc.stats) == true) {
-                    System.out.println("==================================================");
+                    System.out.println("--------------------------------------------------");
                     System.out.println("You slip past undetected.");
-                    System.out.println("==================================================");
+                    System.out.println("--------------------------------------------------");
                     break;
                 } else {
-                    System.out.println("==================================================");
+                    System.out.println("--------------------------------------------------");
                     System.out.println("You attempted to sneak past, but were caught.");
-                    System.out.println("==================================================");
+                    System.out.println("--------------------------------------------------");
                     gc.combat.runEncounter(gc, map);
                     break;
             }
@@ -128,7 +130,9 @@ public class Control {
         } else if (userInput == -1) { //exit
             System.exit(0);
         } else {
+            System.out.println("--------------------------------------------------");
             System.out.println("Choose your next action");
+            System.out.println("--------------------------------------------------");
             continue;
         }
         
@@ -151,12 +155,16 @@ public class Control {
                 break;
             } else if (userInput == 2) {
                 if (maxEnemyCount == -1) {
+                    System.out.println("--------------------------------------------------");
                     System.out.println("I should get going...");
+                    System.out.println("--------------------------------------------------");
                 } else if (map.isLooted() == false) {
                     gc.looting.loot(gc.inventory.getMedPouch(), gc, maxEnemyCount);
                     map.loot();
                 } else {
+                    System.out.println("--------------------------------------------------");
                     System.out.println("You have already looted everything you can");
+                    System.out.println("--------------------------------------------------");
                 }
                 continue;
             } else if (userInput == 3) {

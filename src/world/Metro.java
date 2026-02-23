@@ -32,7 +32,6 @@ public class Metro extends Map {
     public String[] descOne(int enemy) {
         if (enemy == 1) {
             String[] description = {
-                "==================================================",
                 "You step back onto Platform C.",
                 "",
                 "Blankets scattered. Blood dried black on the tiles.",
@@ -42,13 +41,11 @@ public class Metro extends Map {
                 "",
                 "Near the bunks, one Black Torch raider digs through a pack.",
                 "His back is turned.",
-                "=================================================="
             };
             return description;
         } else {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
-                "==================================================",
                 "You step back onto Platform C.",
                 "",
                 "Beds overturned. Barricades smashed inward.",
@@ -60,7 +57,6 @@ public class Metro extends Map {
                 "Torches glow in the dark.",
                 "",
                 "They block the way east.",
-                "=================================================="
             };
             return description;
         }
@@ -69,7 +65,6 @@ public class Metro extends Map {
     public String[] descTwo(int enemy) {
         if (enemy == 1) {
             String[] description = {
-                "==================================================",
                 "You enter the main concourse.",
                 "",
                 "Ticket gates melted. Shops stripped bare.",
@@ -77,21 +72,18 @@ public class Metro extends Map {
                 "",
                 "A lone Black Torch guard stands by the escalator, machete in hand.",
                 "He blocks the path forward.",
-                "=================================================="
             };
 
             return description;
         } else {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
-                "==================================================",
                 "You enter the main concourse.",
                 "",
                 "Burn marks climb the pillars. Shell casings crunch underfoot.",
                 "",
                 enemyCount + " Black Torch raiders patrol the escalators with torches and rifles.",
                 "There's no way around them.",
-                "=================================================="
             };
             return description;
         }
@@ -100,7 +92,6 @@ public class Metro extends Map {
         public String[] descThree(int enemy) {
         if (enemy == 1) {
             String[] description = {
-                "==================================================",
                 "You slip through a rusted service door.",
                 "",
                 "Lights die behind you. Pipes drip overhead.",
@@ -108,21 +99,18 @@ public class Metro extends Map {
                 "",
                 "One Black Torch scout waits near the bend, warming his hands over a small fire.",
                 "Beyond him is the way out.",
-                "=================================================="
             };
 
             return description;
         } else {
             String enemyCount = String.valueOf(enemy);
             String[] description = {
-                "==================================================",
                 "You enter the maintenance tunnel.",
                 "",
                 "Cold air. Hanging cables. Fresh footprints in ash.",
                 "",
                 enemyCount + " Black Torch raiders sit around a barrel fire, weapons close.",
                 "They're guarding the only exit east.",
-                "=================================================="
             };
             return description;
         }
@@ -130,6 +118,8 @@ public class Metro extends Map {
 
     public void play(GameContext gc) {
         for (int i = 0; i < map.size(); ++i) {
+            System.out.println("==================================================");
+            System.out.println("LOCATION: " + map.get(i).getName());
             printDescription(i);
             while (true) {
                 //if there is enemies present

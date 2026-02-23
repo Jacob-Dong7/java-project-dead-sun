@@ -48,7 +48,16 @@ public class Stats {
 
         System.out.println("\n\n==================================================");
 
-        input = scnr.nextInt();
+        if (scnr.hasNextInt()) {
+            input = scnr.nextInt();
+        } else {
+            System.out.println("--------------------------------------------------");
+            System.out.println("Warning: Please enter a number 1-4");
+            System.out.println("--------------------------------------------------");
+            scnr.next();
+            continue;
+        }
+
 
         //user skill selection input
         if (input == 1) {

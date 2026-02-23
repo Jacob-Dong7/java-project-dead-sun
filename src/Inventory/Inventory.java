@@ -17,9 +17,9 @@ public class Inventory {
         wallet = new Currency(20); //start user off with 20 bucks
         medPouch = new ArrayList<>();
         weaponSling = new ArrayList<>();  
-        ammoPouch = new Ammo(2);
+        ammoPouch = new Ammo(5);
 
-        medPouch.add(new HealingItem(Healing.BANDAGE, 2)); //start user off with 2 bandage
+        medPouch.add(new HealingItem(Healing.BANDAGE, 3)); //start user off with 2 bandage
         weaponSling.add(Weapon.KNIFE); //starting weapon is knife
         weaponSling.add(Weapon.PISTOL);
     }
@@ -51,10 +51,10 @@ public class Inventory {
 
     public void heal(Player player) {
         int input;
-        System.out.println("==================================================");
+        System.out.println("--------------------------------------------------");
         if (player.getHealth() == 100) {
             System.out.println("You check your wounds, but there's nothing to treat.");
-            System.out.println("==================================================");
+            System.out.println("--------------------------------------------------");
             return;
         }
 
@@ -62,20 +62,24 @@ public class Inventory {
         System.out.println("Medicine Pouch:");
         System.out.println("==================================================");
         for (int i = 0; i < medPouch.size(); ++i) {
-            System.out.println(i + 1 + " " + medPouch.get(i).getHeal().getName() + " Amount: " + medPouch.get(i).getAmount());
+            System.out.println(i + 1 + ". " + medPouch.get(i).getHeal().getName() + " Amount: " + medPouch.get(i).getAmount());
         }
         System.out.println("==================================================");
 
         input = scnr.nextInt() - 1;
 
         if (input < 0 || input >= medPouch.size()) {
+            System.out.println("--------------------------------------------------");
             System.out.println("You fumble through your pack but grab nothing useful.");
+            System.out.println("--------------------------------------------------");
             return;
         }
 
 
         if (medPouch.get(input).getAmount() <= 0) {
+            System.out.println("--------------------------------------------------");
             System.out.println("You have ran out of the healing item you want");
+            System.out.println("--------------------------------------------------");
             return;
         }
         int healingFactor = medPouch.get(input).getHeal().getValue();
@@ -98,7 +102,9 @@ public class Inventory {
         if (wallet.canAfford(amount) == true) {
             wallet.decrease(amount);
         } else {
+            System.out.println("--------------------------------------------------");
             System.out.println("You cannot afford to buy this");
+            System.out.println("--------------------------------------------------");
         }
     }
 

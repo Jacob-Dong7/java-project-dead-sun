@@ -76,7 +76,9 @@ public class Combat {
             input = scnr.nextInt();
 
             if (verifyControl(input) == false ) {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Choose your next action");
+                System.out.println("--------------------------------------------------");
                 continue;
             }
                     
@@ -85,7 +87,9 @@ public class Combat {
                 //checks if player uses guns
                 if (gc.player.getWeapon().isRanged() == true) {
                      if (gc.inventory.getAmmo() <= 0) {
+                        System.out.println("--------------------------------------------------");
                         System.out.println("You are out of ammo");
+                        System.out.println("--------------------------------------------------");
                         continue;
                     } 
                     gc.inventory.useAmmo();
@@ -108,7 +112,9 @@ public class Combat {
                 gc.player.getStatus(gc);
                 continue;
             } else {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Choose your next action");
+                System.out.println("--------------------------------------------------");
                 continue;
             }
 
@@ -119,21 +125,22 @@ public class Combat {
             //enemy attack backs depending on how many there are
             if (enemies.isEmpty()) break;
 
-            System.out.println("==================================================");
             System.out.println("ENEMY TURN");
-            System.out.println("==================================================");
+            System.out.println("==================================================\n");
             for (Character enemy : enemies) {
                 System.out.print("[" + enemyCount + "] ");
                 attack(enemy, gc.player, enemy.getWeapon(), gc);
                 ++enemyCount;
             }
-            System.out.println("Your HP: " + gc.player.getHealth() + " / 100");
-            enemyCount = 0;
-        }
-        if (gc.player.getHealth() <= 0) {
+            System.out.println("Your HP: " + gc.player.getHealth() + " / 100\n");
+            enemyCount = 1;
+
+            if (gc.player.getHealth() <= 0) {
             gc.player.killed();
         }
     }
+
+}
 
     public void fightBoss(GameContext gc, Character boss, Dungeon map) {
         int input;
@@ -151,7 +158,9 @@ public class Combat {
             System.out.println("==================================================");
             input = scnr.nextInt();
             if (verifyControl(input) == false ) {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Choose your next move");
+                System.out.println("--------------------------------------------------");
                 continue;
             }
                     
@@ -164,7 +173,9 @@ public class Combat {
                 //checks if player uses guns
                 if (gc.player.getWeapon().isRanged() == true) {
                      if (gc.inventory.getAmmo() <= 0) {
-                        System.out.println("You are out of ammo");
+                        System.out.println("--------------------------------------------------");
+                        System.out.println(">> CLICK. You are out of ammo.");
+                        System.out.println("--------------------------------------------------");
                         continue;
                     } 
                     gc.inventory.useAmmo();
@@ -189,7 +200,9 @@ public class Combat {
                 gc.player.getStatus(gc);
                 continue;
             } else {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Choose your next move");
+                System.out.println("--------------------------------------------------");
                 continue;
             }
 
@@ -228,7 +241,7 @@ public class Combat {
             }
             enemies.remove(0);
             System.out.println("(Enemy Killed)");
-            System.out.println("==================================================");
+            System.out.println("\n==================================================");
             return false;
         } else {
             return true;

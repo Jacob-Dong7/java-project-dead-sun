@@ -46,7 +46,7 @@ public class Player extends Character {
     }
 
     public void create(Stats playerStat) {
-        System.out.println("\n\nCHARACTER CREATION");
+        System.out.println("\nCHARACTER CREATION");
         System.out.println("--------------------------------------------------");
         System.out.println("Please enter your name: ");
 
@@ -61,14 +61,20 @@ public class Player extends Character {
             name = scnr.nextLine().trim();
 
             if (name.isBlank()) {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Warning: No names detected. Please try again:");
+                System.out.println("--------------------------------------------------");
                 continue;
             } else if (name.length() > 20) {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Warning: Your name is too long. Please ensure your name is less than 20 characters long");
                 System.out.println("Please try again:");
+                System.out.println("--------------------------------------------------");
                 continue;
             } else if (name == "-1") {
+                System.out.println("--------------------------------------------------");
                 System.out.println("Exiting...");
+                System.out.println("--------------------------------------------------");
                 System.exit(0);
             } else {
                 break;
@@ -259,8 +265,10 @@ public class Player extends Character {
             return true;
         } else {
             System.out.println("==================================================");
-            System.out.println("You attack and misses");
-            System.out.println("==================================================");
+            System.out.println("YOUR TURN");
+            System.out.println("==================================================\n");
+            System.out.println("Your attack misses.");
+            System.out.println("\n==================================================");
             return false;
         }       
     }

@@ -27,10 +27,11 @@ public class Speech {
                 }
                     System.out.println("You step forward");
                     System.out.println("==================================================");
-                    System.out.println("Speech Options:");
-                    System.out.println("1. Intimidate");
-                    System.out.println("2. Persuade");
-                    System.out.println("3. Fight");
+                    System.out.println("SPEECH OPTIONS");
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("[1] Intimidate");
+                    System.out.println("[2] Persuade");
+                    System.out.println("[3] Fight");
                     System.out.println("==================================================");
                     choice = scnr.nextInt();
             } else {
@@ -151,11 +152,19 @@ public class Speech {
     }
 
     public boolean intimidate(Stats playStats) {
-        int base = 10, buff, chance;
-        chance = random.nextInt(1, 100);
-        buff = 5 * playStats.getStrength();
+        //base 10 percent chance of success. 
+        int base = 10, buff, chance, success;
+        buff = 7 * playStats.getStrength();
+        System.out.println("Speech buff: " + buff);
 
-        if (chance < base + buff) {
+        success = buff + base;
+        
+        chance = random.nextInt(100) + 1;
+
+        System.out.println("Success: " + success);
+        System.out.println("Chance: " + chance);
+
+        if (chance <= success) {
             return true;
         } else {
             return false;
@@ -163,11 +172,12 @@ public class Speech {
     }
 
     public boolean persuade(Stats playStats) {
-        int base = 10, buff, chance;
-        chance = random.nextInt(1, 100);
-        buff = 5 * playStats.getCharisma();
+        int base = 10, buff, chance, success;
+        buff = 7 * playStats.getCharisma();
+        success = buff + base;
+        chance = random.nextInt(100) + 1;
 
-        if (chance < base + buff) {
+        if (chance <= success) {
             return true;
         } else {
             return false;

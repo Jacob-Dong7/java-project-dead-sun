@@ -125,6 +125,10 @@ public class Inventory {
         wallet.increase(amount);
     }
 
+    public void findWeapon(Weapon weapon) {
+        weaponSling.add(weapon);
+    }
+
     public ArrayList<HealingItem> getMedPouch() {
         return medPouch;
     }

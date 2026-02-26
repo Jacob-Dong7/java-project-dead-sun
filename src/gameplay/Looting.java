@@ -1,12 +1,15 @@
 package gameplay;
 
 import java.util.*;
+import items.*;
 
 import core.GameContext;
 import items.Healing;
 import items.HealingItem;
 public class Looting {
+
     protected int ammo, heal, money, enemyCount;
+    protected Weapon weapon;
     private final Random random = new Random();
 
     public Looting() {
@@ -14,6 +17,7 @@ public class Looting {
         this.heal = 0;
         this.money = 0;
         this.enemyCount = 0;
+        this.weapon = null;
     }
 
     public void generate(int enemyCount) {

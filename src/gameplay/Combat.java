@@ -63,15 +63,17 @@ public class Combat {
             System.out.println("Target HP: " + enemies.get(0).getHealth());
             System.out.println("\nYour HP: " + gc.player.getHealth());
 
-            System.out.println("--------------------------------------------------");
+            System.out.println("==================================================");
             System.out.println("ACTIONS");
+            System.out.println("==================================================");
+            System.out.println("COMBAT");
             System.out.println("--------------------------------------------------");
-            System.out.println("Combat:");
-            System.out.println("1. Attack");
-            System.out.println("\nManagement:");
-            System.out.println("2. Heal");
-            System.out.println("3. Switch Weapon");
-            System.out.println("4. Check Status");
+            System.out.println("[1] Attack");
+            System.out.println("\nMANAGEMENT");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[2] Heal");
+            System.out.println("[3] Switch Weapon");
+            System.out.println("[4] Status");
             System.out.println("==================================================");
             input = scnr.nextInt();
 
@@ -152,15 +154,17 @@ public class Combat {
             System.out.println("The Butcher's HP: " + boss.getHealth());
             System.out.println("\nYour HP: " + gc.player.getHealth());
 
-            System.out.println("--------------------------------------------------");
+            System.out.println("==================================================");
             System.out.println("ACTIONS");
+            System.out.println("==================================================");
+            System.out.println("COMBAT");
             System.out.println("--------------------------------------------------");
-            System.out.println("Combat:");
-            System.out.println("1. Attack");
-            System.out.println("\nManagement:");
-            System.out.println("2. Heal");
-            System.out.println("3. Switch Weapon");
-            System.out.println("4. Check Status");
+            System.out.println("[1] Attack");
+            System.out.println("\nMANAGEMENT");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[2] Heal");
+            System.out.println("[3] Switch Weapon");
+            System.out.println("[4] Check Status");
             System.out.println("==================================================");
             input = scnr.nextInt();
             if (verifyControl(input) == false ) {

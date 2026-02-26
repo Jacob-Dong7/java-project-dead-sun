@@ -86,14 +86,13 @@ public class Maintenance extends Map {
             System.out.println("LOCATION: " + map.get(i).getName());
             printDescription(i);
             while (true) {
-                //if boss is present
-                if (map.get(i).enemyCount() > 0) {
+
+                if ((map.get(i).enemyCount() > 0) && (!map.get(i).bossPresent())) {
                     gc.control.enemyPresent(gc, map.get(i));
-                } else if (map.get(i).enemyCount() > 0 && map.get(i).bossPresent() == false){
-                    //goes to no enemy present function in control.java
                     gc.control.noEnemy(gc, map.get(i));
                 } else if (map.get(i).bossPresent()) {
                     gc.control.bossPresent(gc, map.get(i));
+                    gc.control.noEnemy(gc, map.get(i));
                 }
 
                 break;

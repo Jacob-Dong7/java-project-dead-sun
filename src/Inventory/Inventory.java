@@ -97,7 +97,7 @@ public class Inventory {
     }
 
     public int getAmmo() {
-        return ammoPouch.getAmmo();
+        return ammoPouch.getAmount();
     }
 
     public void useAmmo() {
@@ -114,7 +114,7 @@ public class Inventory {
     }
 
     public int getMoney() {
-        return wallet.getAmmount();
+        return wallet.getAmount();
     }
 
     public void findAmmo(int amount) {

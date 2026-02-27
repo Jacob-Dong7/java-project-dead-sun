@@ -1,10 +1,17 @@
 package items;
 public enum Weapon {
     KNIFE(25, "Shiv", false),
-    CLEAVER(30, "Cleaver", false),
-    PISTOL(35, "Homemade Pistol", true),
-    RIFLE(45, "Homemade Assualt Rifle", true),
-    ADVANCERIFLE(60, "Old World Rifle", true);
+    REINFORCED_KNIFE(30, "Combat Shiv", false),
+    CLEAVER(29, "Cleaver", false),
+    REINFORCED_CLEAVER(35, "Reinforced Cleaver", false),
+    SWORD(40, "Welded Greatblade", false),
+    AXE(38, "Fire Axe", false),
+
+    PISTOL(60, "Homemade Pistol", true),
+    SMG(63, "Welded Burstgun", true),
+    RIFLE(80, "Homemade Assualt Rifle", true),
+    ADVANCERIFLE(100, "Old World Rifle", true);
+    
 
 
     final int damage;

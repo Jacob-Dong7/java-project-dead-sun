@@ -1,31 +1,24 @@
 package items;
 
-public class Currency {
-    private int total;
-
+public class Currency extends Items{
 
     public Currency(int amount) {
-        this.total = amount;
+        this.amount = amount;
     }
 
     public boolean canAfford(int cost) {
-        if (this.total - cost <= 0) {
+        if (this.amount - cost <= 0) {
             return false;
         } else {
             return true;
         }
     }
-
-    public int getAmmount() {
-        return this.total;
-    }
-
     public void increase(int amount) {
-        this.total += amount;
+        this.amount += amount;
     }
 
     public void decrease(int amount) {
-        this.total -= amount;
+        this.amount -= amount;
     }
 }
 

@@ -1,14 +1,9 @@
 package items;
 
-public class Ammo {
-    int amount;
+public class Ammo extends Items{
 
     public Ammo(int amount) {
         this.amount = amount;
-    }
-
-    public int getAmmo() {
-        return this.amount;
     }
 
     public void findAmmo(int amount) {

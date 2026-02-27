@@ -155,14 +155,10 @@ public class Speech {
         //base 10 percent chance of success. 
         int base = 10, buff, chance, success;
         buff = 7 * playStats.getStrength();
-        System.out.println("Speech buff: " + buff);
 
         success = buff + base;
         
         chance = random.nextInt(100) + 1;
-
-        System.out.println("Success: " + success);
-        System.out.println("Chance: " + chance);
 
         if (chance <= success) {
             return true;

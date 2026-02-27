@@ -24,7 +24,7 @@ public class Looting {
         this.enemyCount = enemyCount;
 
         for (int i = 0; i < enemyCount; ++i) {
-            this.ammo += random.nextInt(0, 3);
+            this.ammo += random.nextInt(0, 2);
             this.heal += random.nextInt(0, 2);
             this.money += random.nextInt(0, 100);
         }

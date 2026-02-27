@@ -1,7 +1,6 @@
 package items;
 
-public class HealingItem {
-    private int amount;
+public class HealingItem extends Items{
     private Healing item;
 
     public HealingItem(Healing item, int amount) {
@@ -11,10 +10,6 @@ public class HealingItem {
 
     public Healing getHeal() {
         return this.item;
-    }
-
-    public int getAmount() {
-        return this.amount;
     }
 
     public void useItem() {

@@ -13,6 +13,7 @@ public class Game {
     ArrayList<Dungeon> currMap;
     Maintenance maintenanceTunnel;
     Metro metroStation;
+    NewConcourse concourse;
 
     public Game() {   
         Player p = new Player();
@@ -29,6 +30,7 @@ public class Game {
         //maps
         maintenanceTunnel = new Maintenance();
         metroStation = new Metro();
+        concourse = new NewConcourse();
         
     }
 
@@ -44,6 +46,10 @@ public class Game {
         //level two maintenance tunnel
         maintenanceTunnel.populate();
         maintenanceTunnel.play(gc);
+
+        //level three Newconcourse
+        concourse.play(gc);
+
     }
 
 

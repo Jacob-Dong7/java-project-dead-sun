@@ -22,4 +22,8 @@ public class TraderWeapon {
     public int getAmount() {
         return amount;
     }
+
+    public void sell() {
+        --amount;
+    }
 }

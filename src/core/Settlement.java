@@ -6,6 +6,7 @@ public abstract class Settlement {
     protected String name;
     protected int traderCount;
     protected ArrayList<Trader> traders;
+    protected ArrayList<SettlementArea> settlementArea;
 
     public String getName() {
         return name;

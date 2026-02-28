@@ -1,7 +1,9 @@
 package control;
-import java.util.Scanner;
+import java.util.*;
 import core.*;
+import friendly.Trader;
 import items.Weapon;
+
 public class Control {
     private static final Scanner scnr = new Scanner(System.in);
     int userInput;
@@ -247,4 +249,110 @@ public class Control {
 
     }
     
+
+    public void whileTrading(Trader trader,GameContext gc) {
+        while (true) {
+            System.out.println("ACTION");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[1] Trade");
+            System.out.println("[2] Leave");
+            System.out.println("==================================================");
+            userInput = scnr.nextInt();    
+            if (userInput == 2) {
+                return;
+            } else {
+
+            }
+        }
+    }
+     
+    public void inSettlement(GameContext gc, ArrayList<SettlementArea> settlementArea) {
+        int size = settlementArea.size();
+        int current = 0;
+        while (true) {
+            settlementArea.get(current).getDescription();
+            System.out.println("ACTION");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[1] Move forward");
+            System.out.println("[2] Go back");
+            System.out.println("[3] Speak");
+            System.out.println("\nMANAGEMENT");
+            System.out.println("--------------------------------------------------");
+            System.out.println("[4] Inventory");
+            System.out.println("[5] Switch Weapon") ;
+            System.out.println("[6] Status");
+            System.out.println("==================================================");
+            userInput = scnr.nextInt();
+
+            if (userInput == 1) {
+                if (current == size - 1) {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("There is no way forward");
+                    System.out.println("--------------------------------------------------");
+                } else {
+                    ++current;
+                    continue;
+                }
+            } else if (userInput == 2) {
+                if (current == size - 1) {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("You cannot return to New Concourse once you leave.");
+                    System.out.println("Your journey continues from here.");
+                    System.out.println("[2] Proceed");
+                    System.out.println("[1] Return");
+                    System.out.println("--------------------------------------------------");
+
+                    userInput = scnr.nextInt();
+                    if (userInput == 2) {
+                        break;
+                    } else if (userInput == 1){
+                        continue;
+                    } else {
+                        System.out.println("--------------------------------------------------");
+                        System.out.println("Choose your next action");
+                        System.out.println("--------------------------------------------------");
+                    }
+                }
+            } else if (userInput == 3) {
+                Boolean visited = settlementArea.get(current).visited();
+                settlementArea.get(current).getTrader().printDescription(visited);
+                if (visited == false) settlementArea.get(current).visit();
+                whileTrading(settlementArea.get(current).getTrader(), gc);
+            } else if (userInput == 4) {
+                int open;
+                System.out.println("==================================================");
+                System.out.println("INVENTORY");
+                System.out.println("==================================================");
+                System.out.println("[1] Medicine Pouch");
+                System.out.println("[2] Wallet");
+                System.out.println("[3] Ammo Pouch");
+                System.out.println("--------------------------------------------------");
+                System.out.println("[0] Return");
+                System.out.println("==================================================");
+                open = scnr.nextInt();
+                if (open == 1) {
+                    gc.inventory.heal(gc.player);
+                } else if (open == 2) {
+                    System.out.println("==================================================");
+                    System.out.println("$" + String.valueOf(gc.inventory.getMoney()));
+                    System.out.println("==================================================");
+                } else if (open == 3) {
+                    System.out.println("==================================================");
+                    System.out.println("Amount: " + String.valueOf(gc.inventory.getAmmo()));
+                    System.out.println("==================================================");
+                } else {
+                    continue;
+                }      
+            } else if (userInput == 5) {
+                gc.inventory.switchWeapon(gc.player);
+            } else if (userInput == 6) {
+                gc.player.getStatus(gc);
+            } else if (userInput == -1) {
+                System.exit(0);
+            } else {
+                continue;
+            }
+        }
+
+    }    
 }

@@ -20,6 +20,10 @@ public class Ammo extends Items{
         }
     }
 
+    public String getName() {
+        return "Ammunitions";
+    }
+
     public void useAmmo() {
         --amount;
     }

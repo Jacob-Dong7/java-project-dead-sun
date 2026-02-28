@@ -100,6 +100,9 @@ public class Inventory {
         return ammoPouch.getAmount();
     }
 
+    public ArrayList<Weapon> getWeaponSling() {
+        return weaponSling;
+    }
     public void useAmmo() {
         ammoPouch.useAmmo();
     }

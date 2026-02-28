@@ -8,5 +8,8 @@ public abstract class Items {
         return amount;
     }
 
+    public String getName() {
+        return item.getName();
+    }
 
 }

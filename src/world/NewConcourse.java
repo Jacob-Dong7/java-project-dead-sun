@@ -13,6 +13,8 @@ public class NewConcourse extends Settlement {
         Joe joe = new Joe();
         this.traders.add(clara);
         this.traders.add(joe);
+        this.settlementArea.add(new SettlementArea("Central Concourse",clara, getDescription(1)));
+        this.settlementArea.add(new SettlementArea("Service Corrido", joe, getDescription(2)));
     }
 
     public String[] description() {
@@ -74,6 +76,7 @@ public class NewConcourse extends Settlement {
 
     public void play(GameContext gc) {
         int input;
+        boolean success;
         printDescription(description());
         while (true) {
             System.out.println("======================================================================================================================================================");
@@ -89,8 +92,11 @@ public class NewConcourse extends Settlement {
                 System.out.println("==================================================");
                 if (speech(input, gc) == false) {
                     fail();
-                }  else {
+                    success = false;
+                    break;
+                } else {
                     success();
+                    success = true;
                 }
                 System.out.println("==================================================");
                 break;
@@ -101,6 +107,7 @@ public class NewConcourse extends Settlement {
                 System.out.println();
                 System.out.println("You keep walking east.");
                 System.out.println("==================================================");
+                success = false;
                 break;
             } else {
                 System.out.println("--------------------------------------------------");
@@ -110,6 +117,17 @@ public class NewConcourse extends Settlement {
             }
         }
 
+        if (success == false) {
+            System.out.println(">> LEVEL ADVANCED");
+            return;
+        } else {
+            while (true) {
+                gc.control.inSettlement(gc, this.settlementArea);
+                break;
+            }
+
+            System.out.println(">> LEVEL ADVANCED");
+        }
     }
 
     public boolean speech(int option, GameContext gc) {
@@ -195,4 +213,42 @@ public class NewConcourse extends Settlement {
         System.out.println();
         System.out.println("The gate slams shut behind you.");
     }
+
+    public String[] getDescription(int area) {
+        if (area == 1) {
+             String[] desc = {
+                "You step into Central Concourse.",
+                "",
+                "The ceiling arches high overhead, skylights patched with sheet metal.",
+                "Light filters down in dull grey beams.",
+                "",
+                "Balconies above are reinforced with welded scrap.",
+                "Movement shifts behind barricades.",
+                "",
+                "The old information kiosk sits in the center.",
+                "Crates are stacked around it - canned beans, boxed ammunition, sealed antibiotics, cloth bundles.",
+                "",
+                "A stove burns quietly.",
+                "",
+                "This is the settlement's trading floor."
+            };
+            return desc;
+        } else if (area == 2) {
+            String[] desc = {
+                "You move through a door marked SERVICE ACCESS.",
+                "",
+                "The air grows cooler.",
+                "Concrete walls. Exposed wiring.",
+                "",
+                "The smell of oil hangs in the corridor.",
+                "",
+                "A reinforced door stands at the far end."
+            };
+            return desc;
+        } else {
+            String[] desc = {"Description"};
+            return desc;
+        }
+    }
+
 }

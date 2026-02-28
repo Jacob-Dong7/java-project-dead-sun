@@ -102,7 +102,8 @@ public class Clara extends Trader {
             for (int i = 0; i < traderInventory.size(); ++i) {
                 System.out.print("[");
                 System.out.print(i + 1);
-                System.out.println("] " + traderInventory.get(i).getItem().getName() + " DMG - " + traderWeapon.get(i).getWeapon().getDamage() + " Price - " + traderWeapon.get(i).getPrice() + " Amount - " + traderWeapon.get(i).getAmount());
+                System.out.print("] " + traderInventory.get(i).getItem().getName());
+                System.out.println( " Price - " + traderInventory.get(i).getPrice() + " Amount - " + traderWeapon.get(i).getAmount());
             }
             System.out.println("--------------------------------------------------");
             System.out.println("[0] Return");

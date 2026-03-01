@@ -1,9 +1,8 @@
 package friendly;
 
-import java.util.Scanner;
-
 import core.GameContext;
 import items.*;
+import java.util.Scanner;
 
 public class Clara extends Trader {
 
@@ -22,33 +21,31 @@ public class Clara extends Trader {
     @Override
     public String[] getDescription() {
         String[] desc = {
-            "You step into Central Concourse.",
+            "You move toward the kiosk.",
+            "The woman behind the kiosk looks up.",
             "",
-            "The ceiling arches high overhead, skylights patched with metal sheets.",
-            "Light filters down in dull grey beams.",
+            "Up close, the stall is more organized than it first appeared.",
+            "Food tins stacked by label.",
+            "Rounds bundled in cloth.",
+            "Antibiotics sealed tight in metal tins.",
             "",
-            "Balconies above are reinforced with scrap barricades.",
-            "You can feel people watching.",
+            "A kettle simmers on the stove beside her.",
+            "Her eyes assess you quickly - hands, weapon, posture.",
             "",
-            "The old information kiosk sits in the center of the floor.",
-            "Crates are stacked around it - canned food, ammunitions, medicines, cloth bundles.",
+            "\"Welcome to New Concourse. We don't see many new faces.\"",
             "",
-            "A stove burns quietly behind the counter.",
+            "She wipes her hands on a rag.",
             "",
-            "A woman stands there sorting inventory.",
-            "Calm. Methodical.",
+            "\"Name's Clara\"",
             "",
-            "She looks up at you.",
+            "She leans slightly against the counter.",
             "",
-            "\"Welcome to New Concourse, we don't get that many newcomers nowadays\" she says.",
-            "",
-            "Her eyes flick briefly to your hands, your gear, your posture.",
-            "",
-            "\"Names Clara.\"",
             "\"You buying?\"",
+            "",
             "Your stomach answers before you do.",
             "",
             "She slides a dented tin of navy beans and a bottle of purified water across the counter..",
+            "",
             "\"Food and water for 10.\"",
             "",
             "You hand over what you can spare.",
@@ -58,13 +55,12 @@ public class Clara extends Trader {
             "",
             "The ache in your gut dulls.",
             "",
-            "This is the settlement's main trading floor.",
-            "",
-            "Beyond the far wall, a sign reads: SERVICE ACCESS.",
+            "You looks around as you eat",
+            "You see that beyond the far wall, a sign reads: SERVICE ACCESS.",
             "A heavier section of the mall lies deeper inside.",
-            "Clara is already back to sorting inventory.",
             "",
-            "\"You need anything else?\""
+            "You finish the canned food quickly.",
+            "\"You need anything else?\" says Clara"
     };
     return desc;
 
@@ -73,44 +69,45 @@ public class Clara extends Trader {
     @Override
     public String[] getDescriptionVisited() {
         String[] desc = {
-            "You step back into Central Concourse.",
-            "",
-            "The stove is burning.",
-            "Traders move between stacked crates.",
-            "",
             "Clara stands behind the kiosk, counting inventory.",
             "",
-            "She looks up briefly.",
-            "",
-            "\"Back again.\"",
+            "\"Back again?\" She says as you approach",
             "",
             "\"What do you need?\""
         };
         return desc;    
     }
 
-    @Override
+   @Override
     public void trade(GameContext gc) {
-        int input;
-        Scanner scnr = new Scanner(System.in);
+
 
         while (true) {
+            Scanner scnr = new Scanner(System.in);
+            int input, amount = 0, price = 0, choice; 
 
             System.out.println("==================================================");
-            System.out.println("TRADING - CONCOURSE PROVISIONS");
+            System.out.println("TRADING - " + getName().toUpperCase() + "'S GENERAL GOODS");
+            System.out.println("Credits: " + gc.inventory.getMoney());
             System.out.println("==================================================");
             for (int i = 0; i < traderInventory.size(); ++i) {
                 System.out.print("[");
                 System.out.print(i + 1);
-                System.out.print("] " + traderInventory.get(i).getItem().getName());
-                System.out.println( " Price - " + traderInventory.get(i).getPrice() + " Amount - " + traderWeapon.get(i).getAmount());
+                System.out.print("] ");
+                if (traderInventory.get(i).getItem() instanceof HealingItem) {
+                    HealingItem healingItem = (HealingItem) traderInventory.get(i).getItem();
+                    System.out.print( healingItem.getHeal().getName() + " | PRICE  $" + traderInventory.get(i).getPrice() + " | STOCK " + traderInventory.get(i).getItem().getAmount());
+                    System.out.println(" | HEALING " + traderInventory.get(i).getItem().getAmount() + " HP");
+                } else if (traderInventory.get(i).getItem() instanceof Ammo) {
+                    System.out.println(traderInventory.get(i).getItem().getName() + " | PRICE  $" + traderInventory.get(i).getPrice() + " | STOCK " + traderInventory.get(i).getItem().getAmount());
+                }
             }
             System.out.println("--------------------------------------------------");
             System.out.println("[0] Return");
             System.out.println("==================================================");
 
             input = scnr.nextInt();
-            if (input > traderWeapon.size() + 1 || input < 0) {
+            if (input > traderInventory.size() || input < 0) {
                 System.out.println("--------------------------------------------------");
                 System.out.println("Select from avaliable actions");
                 System.out.println("--------------------------------------------------");
@@ -118,34 +115,83 @@ public class Clara extends Trader {
 
             if (input == 0) return;
 
-            for (Weapon weapon : gc.inventory.getWeaponSling()) {
-                if (weapon == traderWeapon.get(input - 1).getWeapon()) {
-                    hasWeapon = true;
-                    break;
-                }
-            }
+            choice = input;
 
-            if (hasWeapon == true) {
-                alreadyOwn();
-                continue;            
-            }
-
-            if (traderWeapon.get(input - 1).getAmount() <= 0) {
+            if (traderInventory.get(choice - 1).getItem().getAmount() <= 0) {
                 noStock();
                 continue;
             }
 
-            if (gc.inventory.getMoney() < traderWeapon.get(input - 1).getPrice()) {
-                noMoney();
-                continue;
-            } else {
-                gc.inventory.useMoney(traderWeapon.get(input - 1).getPrice());
-                gc.inventory.findWeapon(traderWeapon.get(input - 1).getWeapon());
-                traderWeapon.get(input - 1).sell();
+            if (traderInventory.get(choice - 1).getItem() instanceof Ammo) {
                 System.out.println("--------------------------------------------------");
-                System.out.println("+ " + traderWeapon.get(input - 1).getWeapon().getName());
+                System.out.println("Enter Quantity (Stock Left " + traderInventory.get(choice - 1).getItem().getAmount() + "): ");
                 System.out.println("--------------------------------------------------");
+                input = scnr.nextInt();
+                if (input < 0 || input > traderInventory.get(choice - 1).getItem().getAmount()) {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("Out of stock");
+                    System.out.println("--------------------------------------------------");
+                    continue;
+                }
+
+                amount = input;
+                price = traderInventory.get(choice - 1).getPrice() * amount;
+                 System.out.println("-23");
+                if (gc.inventory.getMoney() < price) {
+                    noMoney();
+                    continue;
+                }  else {
+                    gc.inventory.useMoney(price);
+                    gc.inventory.findAmmo(amount);
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("+ " + amount + " ammo");
+                    System.out.println("--------------------------------------------------");
+
+                }
+            } else if (traderInventory.get(choice - 1).getItem() instanceof HealingItem) {
+                System.out.println("--------------------------------------------------");
+                System.out.println("Enter Quantity (Stock Left " + traderInventory.get(choice - 1).getItem().getAmount() + "): ");
+                System.out.println("--------------------------------------------------");
+                HealingItem heal = (HealingItem) traderInventory.get(choice - 1).getItem();
+                Healing newHeal = (Healing) heal.getHeal();
+
+                input = scnr.nextInt();
+                if (input < 0 || input > traderInventory.get(choice - 1).getItem().getAmount()) {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println("Out of stock");
+                    System.out.println("--------------------------------------------------");
+                    continue;
+                }
+
+
+                amount = input;
+                price = amount * traderInventory.get(choice - 1).getPrice();
+
+                if (gc.inventory.getMoney() < price) {
+                    noMoney();
+                    continue;
+                } else {
+                    Boolean hasHeal = false;
+                    for (HealingItem med : gc.inventory.getMedPouch()) {
+                        if (med.getHeal() ==  heal.getHeal()) {
+                            System.out.println("+ " + heal.getName()  + " x" + amount);
+                            med.buyItem(amount);
+                            hasHeal = true;
+                            break;
+                        }
+                    }           
+                    
+                    if (hasHeal == false) {
+                        System.out.println("+ " + newHeal.getName() + " x" + amount + " (New item added to Medical Pouch)");
+                        gc.inventory.getMedPouch().add(new HealingItem(newHeal, amount));
+                    }
+
+                }
+
+                }
+
+                traderInventory.get(choice - 1).sell(amount);
+                
             }
-        }
-    }
+        } 
 }

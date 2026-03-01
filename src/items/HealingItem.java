@@ -20,4 +20,8 @@ public class HealingItem extends Items{
         ++amount;
     }
 
+    public void buyItem(int amount) {
+        this.amount += amount;
+    }
+
 }

@@ -18,4 +18,8 @@ public class TraderItem {
     public int getPrice() {
         return price;
     }
+
+    public void sell(int amount) {
+        this.item.removeAmount(amount);
+    }
 }

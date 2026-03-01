@@ -8,8 +8,13 @@ public abstract class Items {
         return amount;
     }
 
+    public void removeAmount(int amount) {
+        this.amount -= amount;
+    }
     public String getName() {
         return item.getName();
     }
+
+
 
 }

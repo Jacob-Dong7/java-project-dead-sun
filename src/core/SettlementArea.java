@@ -3,15 +3,17 @@ import friendly.*;
 public class SettlementArea {
     private boolean visited;
     private Trader trader;
-    private String[] desc;
+    private String[] desc, descVisited;
     private String areaName;
 
-    public SettlementArea(String name, Trader trader, String[] desc) {
+    public SettlementArea(String name, Trader trader, String[] desc, String[] descVisited) {
         this.areaName = name;
         this.visited = false; 
         this.trader = trader;
         this.desc = desc;
+        this.descVisited = descVisited;
     }
+
 
     public Trader getTrader() {
         return trader;
@@ -33,6 +35,10 @@ public class SettlementArea {
         printDescription(desc);
     }
 
+    public void getDescriptionVisited() {
+        printDescription(descVisited);
+    }
+
     public void printDescription(String[] prompt) {
         System.out.println("==================================================");
         System.out.println("LOCATION: " + getName());
@@ -40,6 +46,5 @@ public class SettlementArea {
         for (int i = 0; i < prompt.length; ++i) {
             System.out.println(prompt[i]);
         }
-        System.out.println("==================================================");
     }
 }

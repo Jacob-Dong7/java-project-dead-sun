@@ -14,7 +14,7 @@ public class Inventory {
     private static final Scanner scnr = new Scanner(System.in);
 
     public Inventory() {
-        wallet = new Currency(20); //start user off with 20 bucks
+        wallet = new Currency(10000000); //start user off with 20 bucks
         medPouch = new ArrayList<>();
         weaponSling = new ArrayList<>();  
         ammoPouch = new Ammo(5);
@@ -107,13 +107,7 @@ public class Inventory {
         ammoPouch.useAmmo();
     }
     public void useMoney(int amount) {
-        if (wallet.canAfford(amount) == true) {
-            wallet.decrease(amount);
-        } else {
-            System.out.println("--------------------------------------------------");
-            System.out.println("You cannot afford to buy this");
-            System.out.println("--------------------------------------------------");
-        }
+        wallet.decrease(amount);
     }
 
     public int getMoney() {
@@ -135,5 +129,6 @@ public class Inventory {
     public ArrayList<HealingItem> getMedPouch() {
         return medPouch;
     }
+
 }
 

@@ -7,7 +7,7 @@ public class Stats {
     int strength, charisma, stealth, points, input;
 
     public Stats() {
-        strength = 0;
+        strength = 11110;
         stealth = 0;
         charisma = 0;
         points = 5;
@@ -40,10 +40,11 @@ public class Stats {
             "\n--------------------------------------------------\n"
         );
 
-        System.out.println("1.  Strength");
-        System.out.println("2.  Charisma");
-        System.out.println("3.  Stealth");
-        System.out.println("4.  Reset Points");
+        System.out.println("[1]  Strength");
+        System.out.println("[2]  Charisma");
+        System.out.println("[3]  Stealth");
+        System.out.println("--------------------------------------------------");
+        System.out.println("[4]  Reset Points");
 
 
         System.out.println("\n==================================================");

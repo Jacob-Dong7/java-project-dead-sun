@@ -8,6 +8,7 @@ public class Joe extends Trader{
 
     public Joe() {
         super("Joe", TraderType.WEAPON);
+        populateVendor();
     }
     @Override
     public void populateVendor() {
@@ -20,26 +21,18 @@ public class Joe extends Trader{
     @Override 
     public String[] getDescription() {
         String[] desc = {
-            "You push through the door marked SERVICE ACCESS.",
+            "The reinforced door opens halfway.",
             "",
-            "The noise of the Concourse fades behind you.",
+            "A man sits behind a heavy industrial workbench.",
             "",
-            "Concrete walls. Exposed wiring.",
-            "The air smells of oil and burnt metal.",
+            "Rifles lie arranged in precise rows.",
+            "Magazines stacked by caliber.",
+            "Parts sorted into labeled trays.",
             "",
-            "A reinforced door blocks the end of the corridor.",
-            "",
+            "The lighting is harsher here.",
             "A voice comes from inside.",
             "",
-            "\"Hold.\"",
-            "",
-            "The door opens halfway.",
-            "",
-            "A man sits behind a heavy workbench.",
-            "Rifles laid out in neat rows.",
-            "Magazines stacked. Parts labeled.",
-            "",
-            "Nothing here is decorative.",
+            "\"Hold.\" The man said",
             "",
             "He studies you without standing.",
             "",
@@ -53,15 +46,9 @@ public class Joe extends Trader{
     @Override
     public String[] getDescriptionVisited() {
         String[] desc = {
-            "You head back into the Service Corridor.",
+            "Joe glances up briefly as you reapproach him.",
             "",
-            "The generator hum continues overhead.",
-            "",
-            "Joe is at his bench, reassembling a rifle.",
-            "",
-            "He glances up briefly.",
-            "",
-            "\"What do you need?\""
+            "\"You again. What can I do for you?\""
         };
         return desc;
     }
@@ -74,27 +61,29 @@ public class Joe extends Trader{
 
         while (true) {
             hasWeapon = false;
-
             System.out.println("==================================================");
-            System.out.println("TRADING - JOE'S WEAPONS & ARMS");
+            System.out.println("TRADING - " + getName().toUpperCase() + "'S WEAPONS & ARMS");
+            System.out.println("Credits: " + gc.inventory.getMoney());
             System.out.println("==================================================");
             for (int i = 0; i < traderWeapon.size(); ++i) {
                 System.out.print("[");
                 System.out.print(i + 1);
-                System.out.println("] " + traderWeapon.get(i).getWeapon().getName() + " DMG - " + traderWeapon.get(i).getWeapon().getDamage() + " Price - " + traderWeapon.get(i).getPrice() + " Amount - " + traderWeapon.get(i).getAmount());
+                System.out.println("] " + traderWeapon.get(i).getWeapon().getName() + " | DMG  " + traderWeapon.get(i).getWeapon().getDamage() + " | PRICE  $" + traderWeapon.get(i).getPrice() + " | STOCK  " + traderWeapon.get(i).getAmount());
             }
             System.out.println("--------------------------------------------------");
             System.out.println("[0] Return");
             System.out.println("==================================================");
 
             input = scnr.nextInt();
-            if (input > traderWeapon.size() + 1 || input < 0) {
+            if (input > traderWeapon.size() || input < 0) {
                 System.out.println("--------------------------------------------------");
                 System.out.println("Select from avaliable actions");
                 System.out.println("--------------------------------------------------");
             }
 
-            if (input == 0) return;
+            if (input == 0) {
+                return;
+            }
 
             for (Weapon weapon : gc.inventory.getWeaponSling()) {
                 if (weapon == traderWeapon.get(input - 1).getWeapon()) {
@@ -125,6 +114,7 @@ public class Joe extends Trader{
                 System.out.println("--------------------------------------------------");
             }
         }
+        
     }
 
 }

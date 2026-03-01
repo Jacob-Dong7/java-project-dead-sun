@@ -6,12 +6,14 @@ C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Dungeon.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\GameContext.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Map.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\Settlement.java
+C:\Programming\Java\dead-sun\java-project-dead-sun\src\core\SettlementArea.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\enemy\RaiderBoss.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\enemy\Raiders.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\Clara.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\Joe.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\Trader.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\TraderItem.java
+C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\TraderType.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\friendly\TraderWeapon.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\gameplay\Combat.java
 C:\Programming\Java\dead-sun\java-project-dead-sun\src\gameplay\Looting.java

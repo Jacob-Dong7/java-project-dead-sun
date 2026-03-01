@@ -252,6 +252,8 @@ public class Control {
 
     public void whileTrading(Trader trader,GameContext gc) {
         while (true) {
+            System.out.println("INTERACTION - " + trader.getName());
+            System.out.println("==================================================");
             System.out.println("ACTION");
             System.out.println("--------------------------------------------------");
             System.out.println("[1] Trade");
@@ -259,9 +261,19 @@ public class Control {
             System.out.println("==================================================");
             userInput = scnr.nextInt();    
             if (userInput == 2) {
+                System.out.println("==================================================");
+                System.out.println("You shake your head.");
+                System.out.println("\"Not today.\"");
+                System.out.println(trader.getName() + " nods and returns to work.");
+                System.out.println("==================================================");
                 return;
+            } else if (userInput == 1) {
+                trader.trade(gc);
+                break;
             } else {
-
+                System.out.println("--------------------------------------------------");
+                System.out.println("Choose your next action");
+                System.out.println("--------------------------------------------------");                
             }
         }
     }
@@ -269,13 +281,26 @@ public class Control {
     public void inSettlement(GameContext gc, ArrayList<SettlementArea> settlementArea) {
         int size = settlementArea.size();
         int current = 0;
+        Boolean userPresent = false;
+
         while (true) {
-            settlementArea.get(current).getDescription();
+
+            if (userPresent == false) {
+                if (settlementArea.get(current).visited() == false) {
+                    settlementArea.get(current).getDescription();
+                } else {
+                    settlementArea.get(current).getDescriptionVisited();
+                }
+            }
+            userPresent = false;
+
+            
+            System.out.println("==================================================");
             System.out.println("ACTION");
             System.out.println("--------------------------------------------------");
             System.out.println("[1] Move forward");
             System.out.println("[2] Go back");
-            System.out.println("[3] Speak");
+            System.out.println("[3] Talk");
             System.out.println("\nMANAGEMENT");
             System.out.println("--------------------------------------------------");
             System.out.println("[4] Inventory");
@@ -283,24 +308,30 @@ public class Control {
             System.out.println("[6] Status");
             System.out.println("==================================================");
             userInput = scnr.nextInt();
+            settlementArea.get(current).visit();
 
             if (userInput == 1) {
-                if (current == size - 1) {
+                if (current + 1 == size) {
+                    System.out.println("Current : " + current);
                     System.out.println("--------------------------------------------------");
                     System.out.println("There is no way forward");
                     System.out.println("--------------------------------------------------");
+                    userPresent = true;
                 } else {
                     ++current;
                     continue;
                 }
             } else if (userInput == 2) {
-                if (current == size - 1) {
-                    System.out.println("--------------------------------------------------");
+                if (current == 0) {
+                    System.out.println("==================================================");
+                    System.out.println("WARNING");
+                    System.out.println("==================================================");
                     System.out.println("You cannot return to New Concourse once you leave.");
                     System.out.println("Your journey continues from here.");
                     System.out.println("[2] Proceed");
                     System.out.println("[1] Return");
-                    System.out.println("--------------------------------------------------");
+                    System.out.println("==================================================");
+                    userPresent = true;
 
                     userInput = scnr.nextInt();
                     if (userInput == 2) {
@@ -312,13 +343,22 @@ public class Control {
                         System.out.println("Choose your next action");
                         System.out.println("--------------------------------------------------");
                     }
+                } else {
+                    --current;
+                    continue;
                 }
             } else if (userInput == 3) {
                 Boolean visited = settlementArea.get(current).visited();
-                settlementArea.get(current).getTrader().printDescription(visited);
+                Trader trader = settlementArea.get(current).getTrader();
+                trader.printDescription(visited);
+
                 if (visited == false) settlementArea.get(current).visit();
+
                 whileTrading(settlementArea.get(current).getTrader(), gc);
+                userPresent = true;
+                continue;
             } else if (userInput == 4) {
+                userPresent = true;
                 int open;
                 System.out.println("==================================================");
                 System.out.println("INVENTORY");
@@ -344,8 +384,10 @@ public class Control {
                     continue;
                 }      
             } else if (userInput == 5) {
+                userPresent = true;
                 gc.inventory.switchWeapon(gc.player);
             } else if (userInput == 6) {
+                userPresent = true;
                 gc.player.getStatus(gc);
             } else if (userInput == -1) {
                 System.exit(0);

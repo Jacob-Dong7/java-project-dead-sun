@@ -7,14 +7,13 @@ public class NewConcourse extends Settlement {
     Scanner scnr = new Scanner(System.in);
 
     public NewConcourse() {
+        this.settlementArea = new ArrayList<>();
         this.name = "New Concourse";
         this.traderCount = 2;
         Clara clara = new Clara();
         Joe joe = new Joe();
-        this.traders.add(clara);
-        this.traders.add(joe);
-        this.settlementArea.add(new SettlementArea("Central Concourse",clara, getDescription(1)));
-        this.settlementArea.add(new SettlementArea("Service Corrido", joe, getDescription(2)));
+        this.settlementArea.add(new SettlementArea("Central Concourse",clara, getDescription(1), getDescriptionVisited(1)));
+        this.settlementArea.add(new SettlementArea("Service Corrido", joe, getDescription(2), getDescriptionVisited(2)));
     }
 
     public String[] description() {
@@ -22,7 +21,7 @@ public class NewConcourse extends Settlement {
         "You climb out of the maintenance shaft and pull the hatch closed behind you.",
         "Cold air cuts through your clothes. Ash drifts across the streets in slow grey waves.",
         "",
-        "Skyscrapers rise around you — hollow shells, windows blown out, steel exposed like ribs.",
+        "Skyscrapers rise around you - hollow shells, windows blown out, steel exposed like ribs.",
         "",
         "You walk.",
         "",
@@ -42,7 +41,7 @@ public class NewConcourse extends Settlement {
         "",
         "The city does not end.",
         "",
-        "Then — smoke.",
+        "Then - smoke.",
         "",
         "Faint. Thin. Rising between towers.",
         "",
@@ -91,14 +90,19 @@ public class NewConcourse extends Settlement {
             if (input == 1 || input == 2) {
                 System.out.println("==================================================");
                 if (speech(input, gc) == false) {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println(">>SPEECH CHECK FAILED");
+                    System.out.println("--------------------------------------------------");
                     fail();
                     success = false;
                     break;
                 } else {
+                    System.out.println("--------------------------------------------------");
+                    System.out.println(">>SPEECH CHECK SUCCESSFUL");
+                    System.out.println("--------------------------------------------------");
                     success();
                     success = true;
                 }
-                System.out.println("==================================================");
                 break;
             } else if (input == 3) {
                 System.out.println("==================================================");
@@ -215,40 +219,74 @@ public class NewConcourse extends Settlement {
     }
 
     public String[] getDescription(int area) {
-        if (area == 1) {
-             String[] desc = {
-                "You step into Central Concourse.",
-                "",
-                "The ceiling arches high overhead, skylights patched with sheet metal.",
-                "Light filters down in dull grey beams.",
-                "",
-                "Balconies above are reinforced with welded scrap.",
-                "Movement shifts behind barricades.",
-                "",
-                "The old information kiosk sits in the center.",
-                "Crates are stacked around it - canned beans, boxed ammunition, sealed antibiotics, cloth bundles.",
-                "",
-                "A stove burns quietly.",
-                "",
-                "This is the settlement's trading floor."
-            };
-            return desc;
-        } else if (area == 2) {
-            String[] desc = {
-                "You move through a door marked SERVICE ACCESS.",
-                "",
-                "The air grows cooler.",
-                "Concrete walls. Exposed wiring.",
-                "",
-                "The smell of oil hangs in the corridor.",
-                "",
-                "A reinforced door stands at the far end."
-            };
-            return desc;
-        } else {
-            String[] desc = {"Description"};
-            return desc;
-        }
+        String[] desc;
+            switch (area) {
+                case 1:
+                    desc = new String[] {
+                    "You step into Central Concourse.",
+                    "",
+                    "The ceiling arches high overhead, skylights patched with sheet metal.",
+                    "Cold daylight spills down in muted grey shafts.",
+                    "",
+                    "Balconies above are reinforced with welded scrap.",
+                    "Movement shifts behind barricades.",
+                    "",
+                    "The old information kiosk sits in the center.",
+                    "Crates are stacked around it - canned beans, boxed ammunition, sealed antibiotics, cloth bundles.",
+                    "",
+                    "A stove burns quietly.",
+                    "A woman works the stall with steady hands, sorting goods without looking rushed.",
+                    "This is the settlement's trading floor."
+                };
+                break;
+
+                case 2:
+                    desc = new String[] {
+                    "You move through a door marked SERVICE ACCESS.",
+                    "The noise of the concourse dies behind you.",
+                    "The air grows cooler.",
+                    "The corridor narrows immediately.",
+                    "",
+                    "Concrete walls sweat with condensation.",
+                    "Exposed wiring runs along the ceiling in bundled veins.",
+                    "A reinforced door stands at the far end."
+                };
+                break;
+
+                default:
+                    desc = new String[] {"Unknown"};
+                    break;
+            }
+        return desc;
     }
 
+    public String[] getDescriptionVisited(int area) {
+        String[] desc;
+        switch (area) {
+            case 1:
+                desc = new String[] {
+                    "You head back into Central Concourse.",
+                    "",
+                    "Muted daylight filters through patched skylights.",
+                    "Movement shifts along the reinforced balconies.",
+                    "Clara stands at the kiosk, sorting supplies.."
+                };
+                break;
+            
+            case 2:
+                desc = new String[] {
+                    "You return to the Service Corridor.",
+                    "",
+                    "The air still smells of oil and metal.",
+                    "The reinforced door waits at the end."
+                };
+                break;
+
+                default:
+                    desc = new String[] {"Unknown"};
+                    break;
+            }
+
+            return desc;
+    }
 }
